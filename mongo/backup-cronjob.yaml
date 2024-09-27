@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongo-backup-cronjob
+spec:
+  schedule: "0 23 * * *"  # Runs every day at 23:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-core
+            image: docker.io/bitnami/mongodb:7.0.14-debian-12-r3
+            securityContext:
+              runAsUser: 0
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /tmp/mongobackup
+            env:
+            - name: MONGO_ROOT_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-mongodb
+                  key: mongodb-root-password
+            - name: MONGO_IP
+              value: "192.168.49.2"
+            - name: MONGO_PORT
+              value: "30020"
+            - name: MONGO_BACKUP_PATH
+              value: "/tmp/mongobackup"
+            - name: MONGO_DB_TO_BACKUP
+              value: "mydb"
+            command: ["/bin/sh", "-c", "mongodump --host $MONGO_IP --port $MONGO_PORT --archive=$MONGO_BACKUP_PATH --db $MONGO_DB_TO_BACKUP -u root -p $MONGO_ROOT_PWD --authenticationDatabase admin"]
+          restartPolicy: Never
+          volumes:
+          - name: backup-storage
+            hostPath:
+              path: /data
+#scp -i $(minikube ssh-key) docker@$(minikube ip):/data/archive /home/eiachh/homefoodsproject/mongo/dump

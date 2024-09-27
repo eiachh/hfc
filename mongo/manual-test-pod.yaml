@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodb-test-pod
+spec:
+  containers:
+  - name: mongodb
+    image: docker.io/bitnami/mongodb:7.0.14-debian-12-r3
+    securityContext:
+      runAsUser: 0  
