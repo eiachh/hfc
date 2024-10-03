@@ -27,9 +27,9 @@ type MongoStorage struct {
 	Client     mongo.Client
 }
 
-func NewMongoStorage(uname string, pwd string, host string, port string, db string, authDB string) *MongoStorage {
+func NewMongoStorage(uname string, pwd string, host string, port string, offDb string, cacheDb string, authDB string) *MongoStorage {
 	// Create a MongoDB URI
-	connString := fmt.Sprintf("mongodb://%s:%s@%s:%s/%s?authSource=%s", uname, pwd, host, port, db, authDB)
+	connString := fmt.Sprintf("mongodb://%s:%s@%s:%s/%s?authSource=%s", uname, pwd, host, port, cacheDb, authDB)
 
 	ctx := context.Background()
 	// Connect to MongoDB
@@ -44,7 +44,8 @@ func NewMongoStorage(uname string, pwd string, host string, port string, db stri
 		Host:           host,
 		Port:           port,
 		authDB:         authDB,
-		CacheDatabase:  db,
+		CacheDatabase:  cacheDb,
+		OFFDatabase:    offDb,
 		CollectionName: "products",
 		ConnString:     connString,
 		Ctx:            ctx,

@@ -29,7 +29,7 @@ spec:
             - name: MONGO_BACKUP_PATH
               value: "/tmp/mongobackup"
             - name: MONGO_DB_TO_BACKUP
-              value: "mydb"
+              value: "loc-cache"
             command: ["/bin/sh", "-c", "mongodump --host $MONGO_IP --port $MONGO_PORT --archive=$MONGO_BACKUP_PATH --db $MONGO_DB_TO_BACKUP -u root -p $MONGO_ROOT_PWD --authenticationDatabase admin"]
           restartPolicy: Never
           volumes:
