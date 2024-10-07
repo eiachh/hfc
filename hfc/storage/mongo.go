@@ -3,11 +3,14 @@ package storage
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/eiachh/hfc/types"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -53,33 +56,42 @@ func NewMongoStorage(uname string, pwd string, host string, port string, offDb s
 	}
 }
 
-func (s *MongoStorage) New(prod *types.Product) bool {
-	collection := s.Client.Database(s.CacheDatabase).Collection(s.CollectionName)
-	_, err := collection.InsertOne(s.Ctx, prod.AsStr())
+func (s *MongoStorage) NewProduct(prod *types.Product) error {
+	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.CollectionName)
+	filter := bson.M{"code": prod.Code}
+
+	res, err := s.FindInCollection(filter, cacheDBCollection)
 	if err != nil {
-		log.Panic("Error inserting product:", err)
-		return false
+		return err
+	} else if len(*res) > 0 {
+		return errors.New("item already exists in loc-cache")
 	}
-	return true
+
+	_, err = cacheDBCollection.InsertOne(s.Ctx, prod.AsStr())
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // GetByBarCode searches for a product in both the cache and OFF databases based on a barcode.
 // It first checks the cache database, and if no product is found, it queries the OFF database.
 //
 // Parameters:
-// - code: The barcode string used to filter products in both databases.
+// - code: The barcode int used to filter products in both databases.
 //
 // Return Values:
 // - *types.Product: A pointer to the product if found in the cache database.
 // - []byte: A JSON-encoded byte slice of the product if found in the OFF database but not in the cache.
 // - nil, nil: Returned if no product is found in either database.
-func (s *MongoStorage) GetByBarCode(code string) (*types.Product, []byte) {
+func (s *MongoStorage) GetByBarCode(code int) (*types.Product, []byte) {
 	var (
 		cacheDBResults []bson.M
 		offDBResults   []bson.M
 	)
+	codeStr := strconv.Itoa(code)
 
-	filter := bson.M{"code": code}
+	filter := bson.M{"code": codeStr}
 
 	// DB prep
 	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.CollectionName)
@@ -149,4 +161,43 @@ func (s *MongoStorage) RegisterAsMissing(barC int) bool {
 		return false
 	}
 	return true
+}
+
+// FindInCollection finds documents in a MongoDB collection that match the given filter criteria.
+//
+// Parameters:
+//   - filter: A MongoDB filter used to specify the search criteria (type: primitive.M).
+//   - coll: A pointer to the MongoDB collection where the search will be performed.
+//
+// Returns:
+//   - *[]primitive.M: A pointer to a slice of documents (in BSON format) that match the filter criteria.
+//   - error: An error object if any issue occurs during the operation.
+//
+// The function executes a query using the provided filter on the specified collection, iterates through the results,
+// decodes each document into a BSON map, and appends it to a slice. If any error occurs during querying or decoding,
+// the function returns the error.
+func (s *MongoStorage) FindInCollection(filter primitive.M, coll *mongo.Collection) (*[]primitive.M, error) {
+	var cacheDBResults []bson.M
+
+	cacheCursor, err := coll.Find(s.Ctx, filter)
+	if err != nil {
+		return nil, err
+	}
+
+	coll.Find(s.Ctx, filter)
+	defer cacheCursor.Close(s.Ctx)
+
+	for cacheCursor.Next(s.Ctx) {
+		var result bson.M
+		if err := cacheCursor.Decode(&result); err != nil {
+			return nil, err
+		}
+		cacheDBResults = append(cacheDBResults, result)
+	}
+
+	if err := cacheCursor.Err(); err != nil {
+		return nil, err
+	}
+
+	return &cacheDBResults, nil
 }

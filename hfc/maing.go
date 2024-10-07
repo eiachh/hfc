@@ -3,12 +3,10 @@ package main
 import (
 	"flag"
 	_ "image/png"
-	"net/http"
 
 	"github.com/eiachh/hfc/api"
 	"github.com/eiachh/hfc/service"
 	"github.com/eiachh/hfc/storage"
-	"github.com/eiachh/hfc/types"
 
 	"github.com/labstack/echo/v4"
 )
@@ -25,16 +23,21 @@ func main() {
 	}
 
 	db := makeDB()
-	prodHandler := api.NewProdHandler(db, types.NewHomeStorage(), service.NewAiParser(aiCaller))
-	e := echo.New()
+	aiParser := service.NewAiParser(aiCaller, db)
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.GET("/prod/get/:code", prodHandler.GetFood)
-	e.POST("/prod/post/:code", prodHandler.AddFood)
-	e.POST("/prod/new", prodHandler.NewFood)
-	e.POST("/prod/scan/code/:amnt", prodHandler.MOCKScanBarcode)
+	hsMan := service.NewHomeStorageManager(db)
+	prodMan := service.NewProductManager(db, aiParser)
+
+	prodHandler := api.NewProdHandler(prodMan)
+	homestorageHandler := api.NewHsHandler(hsMan)
+
+	e := echo.New()
+	e.GET("/hs", homestorageHandler.GetAllFood)
+	e.POST("/hs/:code", homestorageHandler.AddFood)
+	//e.DELETE("/hs/:code", prodHandler.AddFood)
+
+	e.GET("/prod/:code", prodHandler.GetProduct)
+	e.POST("/prod", prodHandler.NewProd)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

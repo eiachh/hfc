@@ -1,10 +1,15 @@
 package service
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/eiachh/hfc/types"
+	"github.com/labstack/gommon/log"
+)
 
 type MockAiCaller struct{}
 
-func (mockAi *MockAiCaller) callAI(trimmedOff []byte) (*[]byte, error) {
+func (mockAi *MockAiCaller) ParseOff(trimmedOff []byte) (*types.Product, error) {
 	//{"code", "_keywords", "brands", "categories_hierarchy", "product_name"}
 	var data map[string]interface{}
 	retData := make(map[string]interface{})
@@ -58,7 +63,18 @@ func (mockAi *MockAiCaller) callAI(trimmedOff []byte) (*[]byte, error) {
 	if err2 != nil {
 		return nil, err2
 	}
-	return &jsonRetData, nil
+
+	var prod types.Product
+	// TODO check if function call is more info
+	if unmarshallErr := json.Unmarshal(jsonRetData, &prod); unmarshallErr != nil {
+		log.Error(unmarshallErr)
+	}
+
+	return &prod, nil
+}
+
+func (ai *MockAiCaller) WebScrapeParse(barcode int) (*types.Product, error) {
+	return nil, nil
 }
 
 func NewMockAiCaller() *MockAiCaller {

@@ -3,27 +3,28 @@ package types
 import (
 	"encoding/json"
 	"strconv"
-	"time"
 )
 
 type ProductStr struct {
-	Code        string   `json:"code" bson:"code"`
-	Brands      string   `json:"brands" bson:"brands"`
-	Name        string   `json:"product_name" bson:"product_name"`
-	DisplayName string   `json:"display_name" bson:"display_name"`
-	Expire      string   `json:"expire" bson:"expire"`
-	Categories  []string `json:"categories_hierarchy" bson:"categories_hierarchy"`
-	Reviewed    string   `json:"reviewed" bson:"reviewed"`
+	Code            string   `json:"code" bson:"code"`
+	Brands          string   `json:"brands" bson:"brands"`
+	Name            string   `json:"product_name" bson:"product_name"`
+	DisplayName     string   `json:"display_name" bson:"display_name"`
+	Expire          string   `json:"expire_avg" bson:"expire_avg"`
+	Categories      []string `json:"categories_hierarchy" bson:"categories_hierarchy"`
+	Reviewed        string   `json:"reviewed" bson:"reviewed"`
+	MeasurementUnit string   `json:"measurement_unit" bson:"measurement_unit"`
 }
 
 type Product struct {
-	Code        int       `json:"code" bson:"code"`
-	Brands      string    `json:"brands" bson:"brands"`
-	Name        string    `json:"product_name" bson:"product_name"`
-	DisplayName string    `json:"display_name" bson:"display_name"`
-	Expire      time.Time `json:"expire" bson:"expire"`
-	Categories  []string  `json:"categories_hierarchy" bson:"categories_hierarchy"`
-	Reviewed    bool      `json:"reviewed" bson:"reviewed"`
+	Code            int      `json:"code" bson:"code"`
+	Brands          string   `json:"brands" bson:"brands"`
+	Name            string   `json:"product_name" bson:"product_name"`
+	DisplayName     string   `json:"display_name" bson:"display_name"`
+	Expire          int      `json:"expire_avg" bson:"expire_avg"`
+	Categories      []string `json:"categories_hierarchy" bson:"categories_hierarchy"`
+	Reviewed        bool     `json:"reviewed" bson:"reviewed"`
+	MeasurementUnit string   `json:"measurement_unit" bson:"measurement_unit"`
 }
 
 func ProdWithCode(code int) *Product {
@@ -41,7 +42,7 @@ func (p *Product) AsStr() *ProductStr {
 		Name:        p.Name,
 		DisplayName: p.DisplayName,
 		// Format time.Time Expire to string (YYYY-MM-DD)
-		Expire:     p.Expire.Format("2006-01-02"),
+		Expire:     strconv.Itoa(p.Expire),
 		Categories: p.Categories,
 		Reviewed:   strconv.FormatBool(p.Reviewed),
 	}
@@ -55,7 +56,7 @@ func (p *Product) UnmarshalJSON(data []byte) error {
 		Brands      string   `json:"brands"`
 		Name        string   `json:"product_name"`
 		DisplayName string   `json:"display_name"`
-		Expire      string   `json:"expire"` // Temporarily as string
+		Expire      string   `json:"expire_avg"` // Temporarily as string
 		Categories  []string `json:"categories_hierarchy"`
 		Reviewed    string   `json:"reviewed" bson:"reviewed"`
 	}
@@ -64,17 +65,20 @@ func (p *Product) UnmarshalJSON(data []byte) error {
 	}
 
 	// Convert code string to int
-	code, err := strconv.Atoi(aux.Code)
-	if err != nil {
-		return err
+	if aux.Code != "" {
+		code, err := strconv.Atoi(aux.Code)
+		if err != nil {
+			return err
+		}
+		p.Code = code
 	}
-	p.Code = code
+
 	p.Brands = aux.Brands
 	p.Name = aux.Name
 	p.DisplayName = aux.DisplayName
 
 	// Parse expire string to time.Time
-	expire, err := time.Parse("2006-01-02", aux.Expire)
+	expire, err := strconv.Atoi(aux.Expire)
 	if err != nil {
 		return err
 	}
