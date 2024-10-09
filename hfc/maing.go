@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	_ "image/png"
+	"os"
 
 	"github.com/eiachh/hfc/api"
 	"github.com/eiachh/hfc/service"
@@ -29,13 +30,16 @@ func main() {
 	prodMan := service.NewProductManager(db, aiParser)
 
 	prodHandler := api.NewProdHandler(prodMan)
-	homestorageHandler := api.NewHsHandler(hsMan)
+	homestorageHandler := api.NewHsHandler(hsMan, prodMan)
 
 	e := echo.New()
 	e.GET("/hs", homestorageHandler.GetAllFood)
 	e.POST("/hs/:code", homestorageHandler.AddFood)
 	//e.DELETE("/hs/:code", prodHandler.AddFood)
 
+	e.GET("/prod/unverified", prodHandler.GetUnverified)
+	e.GET("/prod/categories", prodHandler.GetCatList)
+	e.PATCH("/prod/:code", prodHandler.GetUnverified)
 	e.GET("/prod/:code", prodHandler.GetProduct)
 	e.POST("/prod", prodHandler.NewProd)
 
@@ -44,8 +48,7 @@ func main() {
 
 func makeDB() *storage.MongoStorage {
 	username := "root"
-	// TODO Un-dox yourself 4head
-	password := "lDyd8IubHC"
+	password := os.Getenv("MONGODB_ROOT_PASSWORD")
 	host := "192.168.49.2"
 	port := "30020"
 	authDB := "admin"

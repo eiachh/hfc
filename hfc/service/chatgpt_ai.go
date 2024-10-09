@@ -112,7 +112,7 @@ func NewAiReqBody() aiReqBody {
 			},
 			{
 				Role:    "user",
-				Content: " code:4014500513010, _keywords: [dairy,dessert,fermented,food,jogobella,jogurt,jogurty,lesní,milk,mléčné,ovoce,ovocné,product,výrobky,zott], brands: Zott, product_name: Jogobella lesní ovoce",
+				Content: "MOCK data fill out the final_result brands, product_name with MOCK so the user can realise its the wrong dataset",
 			},
 		},
 		Tools: []aiTool{
@@ -138,7 +138,7 @@ func NewAiReqBody() aiReqBody {
 								Items:       &aiProperty{Type: "string"},
 							},
 							"expire_avg": {
-								Type:        "string",
+								Type:        "integer",
 								Description: "Assuming the product was made today the expected time in days until it expires only the numbers.",
 							},
 							"measurement_unit": {
@@ -200,8 +200,7 @@ func (ai *ChatGptAiCaller) ParseOff(trimmedOffByte []byte) (*types.Product, erro
 	forceModel := "gpt-4o"
 	aibody := NewAiReqBody()
 	aibody.Model = forceModel
-	// TODO unmock
-	aibody.Messages[1].Content = " code:4014500513010"
+	aibody.Messages[1].Content = string(trimmedOffByte)
 	aibodyJson, _ := json.MarshalIndent(aibody, "", "  ")
 
 	// Perform the request
@@ -215,7 +214,7 @@ func (ai *ChatGptAiCaller) ParseOff(trimmedOffByte []byte) (*types.Product, erro
 	return ai.parseAiResp(barC, chatComp, &aibody, 1)
 }
 
-func (ai *ChatGptAiCaller) WebScrapeParse(barcode int) (*types.Product, error) {
+func (ai *ChatGptAiCaller) WebScrapeParse(barcode int64) (*types.Product, error) {
 	aibody := NewAiReqBody()
 	forceModel := "gpt-4o-mini"
 	aibody.Model = forceModel
@@ -278,8 +277,11 @@ func (ai *ChatGptAiCaller) CallGpt(reqBodyJson []byte) (*ChatCompletion, error) 
 	return &chatComp, nil
 }
 
-// TODO clean, also they cant be nil
-func (ai *ChatGptAiCaller) webScrapeWithCtx(barcode int, chatComp *ChatCompletion, aiReqBody *aiReqBody, callCount int) (*types.Product, error) {
+func (ai *ChatGptAiCaller) webScrapeWithCtx(barcode int64, chatComp *ChatCompletion, aiReqBody *aiReqBody, callCount int) (*types.Product, error) {
+	if chatComp == nil || aiReqBody == nil {
+		return nil, errors.New("chatComp and aiReqBody cannot be nil")
+	}
+
 	if callCount > ai.callCountLimit {
 		return nil, errors.New("tried to call the ai api more than allowed")
 	}
@@ -325,7 +327,7 @@ func getApiKey() string {
 	return os.Getenv("OPENAI_API_KEY")
 }
 
-func (ai *ChatGptAiCaller) parseAiResp(barC int, chatComp *ChatCompletion, aibody *aiReqBody, callCount int) (*types.Product, error) {
+func (ai *ChatGptAiCaller) parseAiResp(barC int64, chatComp *ChatCompletion, aibody *aiReqBody, callCount int) (*types.Product, error) {
 	var prod types.Product
 
 	// TODO Handle logging if by any chance multiple choice or tool calls happened.
@@ -345,7 +347,7 @@ func (ai *ChatGptAiCaller) parseAiResp(barC int, chatComp *ChatCompletion, aibod
 		}
 	}
 	prod.Code = barC
-	if prod.Brands != "UNKNOWS" {
+	if prod.Brands != "UNKNOWN" {
 		prod.DisplayName = prod.Brands + " " + prod.Name
 	} else {
 		prod.DisplayName = prod.Name

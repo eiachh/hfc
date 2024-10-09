@@ -73,7 +73,7 @@ func (mockAi *MockAiCaller) ParseOff(trimmedOff []byte) (*types.Product, error) 
 	return &prod, nil
 }
 
-func (ai *MockAiCaller) WebScrapeParse(barcode int) (*types.Product, error) {
+func (ai *MockAiCaller) WebScrapeParse(barcode int64) (*types.Product, error) {
 	return nil, nil
 }
 

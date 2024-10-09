@@ -24,17 +24,10 @@ func (ai *AiParser) ConvertOffToLocCache(offByte *[]byte) (*types.Product, error
 	if err != nil {
 		return nil, err
 	}
-	product, err := ai.caller.ParseOff(trimmedOff)
-	if err != nil {
-		return product, err
-	}
-	if err := ai.mongo.NewProduct(product); err != nil {
-		return product, err
-	}
-	return product, nil
+	return ai.caller.ParseOff(trimmedOff)
 }
 
-func (ai *AiParser) DoWebscrape(barcode int) (*types.Product, error) {
+func (ai *AiParser) DoWebscrape(barcode int64) (*types.Product, error) {
 	return ai.caller.WebScrapeParse(barcode)
 }
 

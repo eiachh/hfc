@@ -3,10 +3,10 @@ package storage
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
-	"log"
 	"strconv"
+
+	"github.com/labstack/gommon/log"
 
 	"github.com/eiachh/hfc/types"
 	"go.mongodb.org/mongo-driver/bson"
@@ -16,14 +16,16 @@ import (
 )
 
 type MongoStorage struct {
-	username       string
-	password       string
-	Host           string
-	Port           string
-	authDB         string
-	CacheDatabase  string
-	OFFDatabase    string
-	CollectionName string
+	username      string
+	password      string
+	Host          string
+	Port          string
+	authDB        string
+	CacheDatabase string
+	OFFDatabase   string
+
+	ProdCollName string
+	HsCollName   string
 
 	ConnString string
 	Ctx        context.Context
@@ -42,32 +44,61 @@ func NewMongoStorage(uname string, pwd string, host string, port string, offDb s
 	}
 
 	return &MongoStorage{
-		username:       uname,
-		password:       pwd,
-		Host:           host,
-		Port:           port,
-		authDB:         authDB,
-		CacheDatabase:  cacheDb,
-		OFFDatabase:    offDb,
-		CollectionName: "products",
-		ConnString:     connString,
-		Ctx:            ctx,
-		Client:         *client,
+		username:      uname,
+		password:      pwd,
+		Host:          host,
+		Port:          port,
+		authDB:        authDB,
+		CacheDatabase: cacheDb,
+		OFFDatabase:   offDb,
+		ProdCollName:  "products",
+		HsCollName:    "hs",
+		ConnString:    connString,
+		Ctx:           ctx,
+		Client:        *client,
 	}
 }
 
-func (s *MongoStorage) NewProduct(prod *types.Product) error {
-	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.CollectionName)
+func (s *MongoStorage) ALTNewProduct(prod *types.ALTProduct) error {
+	prod.Reviewed = true
+
+	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
 	filter := bson.M{"code": prod.Code}
 
-	res, err := s.FindInCollection(filter, cacheDBCollection)
+	_, err := cacheDBCollection.DeleteMany(s.Ctx, filter)
 	if err != nil {
 		return err
-	} else if len(*res) > 0 {
-		return errors.New("item already exists in loc-cache")
 	}
 
-	_, err = cacheDBCollection.InsertOne(s.Ctx, prod.AsStr())
+	// TODO HS can save correctly this can only save str?
+	_, err = cacheDBCollection.InsertOne(s.Ctx, prod)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *MongoStorage) NewProduct(prod *types.Product) error {
+	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
+	filter := bson.M{"code": prod.Code}
+
+	_, err := cacheDBCollection.DeleteMany(s.Ctx, filter)
+	if err != nil {
+		return err
+	}
+
+	// TODO HS can save correctly this can only save str?
+	_, err = cacheDBCollection.InsertOne(s.Ctx, prod)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *MongoStorage) SaveHomeStorage(hs *types.HomeStorage) error {
+	hsDbCollection := s.Client.Database(s.CacheDatabase).Collection(s.HsCollName)
+	filter := bson.M{}
+	_, err := hsDbCollection.ReplaceOne(s.Ctx, filter, hs, options.Replace().SetUpsert(true))
 	if err != nil {
 		return err
 	}
@@ -84,83 +115,58 @@ func (s *MongoStorage) NewProduct(prod *types.Product) error {
 // - *types.Product: A pointer to the product if found in the cache database.
 // - []byte: A JSON-encoded byte slice of the product if found in the OFF database but not in the cache.
 // - nil, nil: Returned if no product is found in either database.
-func (s *MongoStorage) GetByBarCode(code int) (*types.Product, []byte) {
-	var (
-		cacheDBResults []bson.M
-		offDBResults   []bson.M
-	)
-	codeStr := strconv.Itoa(code)
+func (s *MongoStorage) GetByBarCode(code int64) (*types.Product, []byte) {
+	filterCache := bson.M{"code": code}
+	filterOff := bson.M{"code": strconv.FormatInt(code, 10)}
+	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
+	offDBCollection := s.Client.Database(s.OFFDatabase).Collection(s.ProdCollName)
 
-	filter := bson.M{"code": codeStr}
-
-	// DB prep
-	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.CollectionName)
-	offDBCollection := s.Client.Database(s.OFFDatabase).Collection(s.CollectionName)
-	cacheCursor, err := cacheDBCollection.Find(s.Ctx, filter)
-	offCursor, err2 := offDBCollection.Find(s.Ctx, filter)
-	if err != nil || err2 != nil {
-		if err != nil {
-			log.Fatal(err)
-		} else {
-			log.Fatal(err2)
-		}
+	cacheDBResults, findErrCache := s.FindInCollection(filterCache, cacheDBCollection)
+	if findErrCache != nil {
+		log.Error(findErrCache)
+		return nil, nil
 	}
-	defer cacheCursor.Close(s.Ctx)
-	defer offCursor.Close(s.Ctx)
-
-	// Search
-	for cacheCursor.Next(s.Ctx) {
-		var result bson.M
-		if err := cacheCursor.Decode(&result); err != nil {
-			log.Fatal(err)
-		}
-		cacheDBResults = append(cacheDBResults, result)
-	}
-	if len(cacheDBResults) < 1 {
-		for offCursor.Next(s.Ctx) {
-			var result bson.M
-			if err := offCursor.Decode(&result); err != nil {
-				log.Fatal(err)
-			}
-			offDBResults = append(offDBResults, result)
-		}
-	}
-	if err := cacheCursor.Err(); err != nil {
-		log.Fatal(err)
-	}
-	if err := offCursor.Err(); err != nil {
-		log.Fatal(err)
-	}
-
-	if len(cacheDBResults) == 1 {
+	if len(*cacheDBResults) == 1 {
 		var product types.Product
-		jsonData, _ := json.Marshal(cacheDBResults[0])
+		jsonData, _ := json.Marshal((*cacheDBResults)[0])
 		json.Unmarshal([]byte(jsonData), &product)
 		return &product, nil
 	}
-	if len(offDBResults) == 1 {
-		jsonData, _ := json.Marshal(offDBResults[0])
+
+	offDBResults, findErrOff := s.FindInCollection(filterOff, offDBCollection)
+	if findErrOff != nil {
+		log.Error(findErrOff)
+		return nil, nil
+	}
+	if len(*offDBResults) == 1 {
+		jsonData, _ := json.Marshal((*offDBResults)[0])
 		return nil, jsonData
 	}
-
 	return nil, nil
 }
 
-func (s *MongoStorage) GenerateNew() bool {
-	//TODO Generate new prod somehow
-	if false {
-		log.Panic("Error inserting product:")
-		return false
-	}
-	return true
+func (s *MongoStorage) LoadHomeStorage() (*types.HomeStorage, error) {
+	var homeStorage types.HomeStorage
+
+	hsDbCollection := s.Client.Database(s.CacheDatabase).Collection(s.HsCollName)
+	err := hsDbCollection.FindOne(s.Ctx, bson.M{}).Decode(&homeStorage)
+	return &homeStorage, err
 }
-func (s *MongoStorage) RegisterAsMissing(barC int) bool {
-	//TODO Register as missing somehow
-	if false {
-		log.Panic("Error inserting product:")
-		return false
+
+func (s *MongoStorage) GetUnreviewedProducts() (*[]types.Product, error) {
+	var unreviewed []types.Product
+	filter := bson.M{"reviewed": "false"}
+	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
+	primitives, err := s.FindInCollection(filter, cacheDBCollection)
+	if err != nil {
+		return nil, err
 	}
-	return true
+	jsonData, _ := json.Marshal((*primitives))
+	err = json.Unmarshal(jsonData, &unreviewed)
+	if err != nil {
+		return nil, err
+	}
+	return &unreviewed, nil
 }
 
 // FindInCollection finds documents in a MongoDB collection that match the given filter criteria.
@@ -200,4 +206,16 @@ func (s *MongoStorage) FindInCollection(filter primitive.M, coll *mongo.Collecti
 	}
 
 	return &cacheDBResults, nil
+}
+
+// TODO This needs to be an ordered list not just random strings
+func (s *MongoStorage) GetCatListDistinct() (*[]byte, error) {
+	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
+
+	distCategories, err := cacheDBCollection.Distinct(s.Ctx, "categories_hierarchy", bson.M{})
+	if err != nil {
+
+	}
+	jsonCat, _ := json.Marshal(distCategories)
+	return &jsonCat, nil
 }

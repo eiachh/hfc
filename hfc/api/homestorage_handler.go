@@ -13,9 +13,10 @@ type HsHandler struct {
 	ProductMan         *service.ProductManger
 }
 
-func NewHsHandler(hs *service.HomeStorageManager) *HsHandler {
+func NewHsHandler(hs *service.HomeStorageManager, prodMan *service.ProductManger) *HsHandler {
 	return &HsHandler{
 		HomeStorageManager: hs,
+		ProductMan:         prodMan,
 	}
 }
 
@@ -25,7 +26,7 @@ func (hsh *HsHandler) GetAllFood(c echo.Context) error {
 
 // Add item to HS endpoint handler
 func (hsh *HsHandler) AddFood(c echo.Context) error {
-	barC, convErr := strconv.Atoi(c.Param("code"))
+	barC, convErr := strconv.ParseInt(c.Param("code"), 10, 64)
 	if convErr != nil {
 		return c.JSON(http.StatusBadRequest, convErr)
 	}
@@ -43,15 +44,15 @@ func (hsh *HsHandler) AddFood(c echo.Context) error {
 	if convErr != nil {
 		amntInt = 1
 	}
-	err := hsh.handleHSAdd(barC, amntInt)
+	err := hsh.hsAddFood(barC, amntInt)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	return c.String(http.StatusOK, "Added "+strconv.Itoa(barC)+", amnt: "+amount)
+	return c.String(http.StatusOK, "Added "+strconv.FormatInt(barC, 10)+", amnt: "+amount)
 }
 
-func (hsh *HsHandler) handleHSAdd(barC int, amnt int) error {
+func (hsh *HsHandler) hsAddFood(barC int64, amnt int) error {
 	prod, err := hsh.ProductMan.GetOrRegisterProduct(barC)
 	if err != nil {
 		return err
