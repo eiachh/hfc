@@ -10,11 +10,11 @@ type StorageItem struct {
 
 // TODO separate by user
 type HomeStorage struct {
-	Products map[int64][]StorageItem
+	HomeStorageItems map[int64][]StorageItem
 }
 
 func NewHomeStorage() *HomeStorage {
 	return &HomeStorage{
-		Products: make(map[int64][]StorageItem),
+		HomeStorageItems: make(map[int64][]StorageItem),
 	}
 }

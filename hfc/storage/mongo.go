@@ -155,7 +155,7 @@ func (s *MongoStorage) LoadHomeStorage() (*types.HomeStorage, error) {
 
 func (s *MongoStorage) GetUnreviewedProducts() (*[]types.Product, error) {
 	var unreviewed []types.Product
-	filter := bson.M{"reviewed": "false"}
+	filter := bson.M{"reviewed": false}
 	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
 	primitives, err := s.FindInCollection(filter, cacheDBCollection)
 	if err != nil {

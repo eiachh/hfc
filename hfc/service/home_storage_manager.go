@@ -20,7 +20,7 @@ func NewHomeStorageManager(db *storage.MongoStorage) *HomeStorageManager {
 		hs = types.NewHomeStorage()
 	}
 
-	if len(hs.Products) < 1 {
+	if len(hs.HomeStorageItems) < 1 {
 		hs = types.NewHomeStorage()
 	}
 
@@ -34,13 +34,13 @@ func (manager *HomeStorageManager) InsertProd(amnt int, prod *types.Product) {
 	toInsert := types.StorageItem{Accuired: time.Now()}
 
 	for i := 0; i < amnt; i++ {
-		manager.homeStorage.Products[prod.Code] = append(manager.homeStorage.Products[prod.Code], toInsert)
+		manager.homeStorage.HomeStorageItems[prod.Code] = append(manager.homeStorage.HomeStorageItems[prod.Code], toInsert)
 	}
 	manager.saveHsToDb()
 }
 
 func (manager *HomeStorageManager) GetItems(barC int64) []types.StorageItem {
-	return manager.homeStorage.Products[barC]
+	return manager.homeStorage.HomeStorageItems[barC]
 }
 
 func (manager *HomeStorageManager) GetAll() *types.HomeStorage {
