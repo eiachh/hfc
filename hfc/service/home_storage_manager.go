@@ -1,8 +1,10 @@
 package service
 
 import (
+	"errors"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/labstack/gommon/log"
 
 	"github.com/eiachh/hfc/storage"
@@ -31,12 +33,58 @@ func NewHomeStorageManager(db *storage.MongoStorage) *HomeStorageManager {
 }
 
 func (manager *HomeStorageManager) InsertProd(amnt int, prod *types.Product) {
-	toInsert := types.StorageItem{Accuired: time.Now()}
+	toInsert := types.StorageItem{
+		UUID:     uuid.NewString(),
+		Acquired: time.Now(),
+		Expires:  time.Now().Add(time.Duration(prod.ExpireDays) * 24 * time.Hour),
+	}
 
 	for i := 0; i < amnt; i++ {
 		manager.homeStorage.HomeStorageItems[prod.Code] = append(manager.homeStorage.HomeStorageItems[prod.Code], toInsert)
 	}
 	manager.saveHsToDb()
+}
+
+func (manager *HomeStorageManager) UpdateItem(barCode int64, receivedItem *types.StorageItem) error {
+	itemlist, hasKey := manager.homeStorage.HomeStorageItems[barCode]
+	if !hasKey {
+		return errors.New("item was not present to remove")
+	}
+
+	for ind, item := range itemlist {
+		if item.UUID == receivedItem.UUID {
+			itemlist[ind] = *receivedItem
+			manager.saveHsToDb()
+			return nil
+		}
+	}
+	return errors.New("item was not present to remove")
+}
+
+func (manager *HomeStorageManager) RemoveItem(barCode int64, uuid string) error {
+	itemlist, hasKey := manager.homeStorage.HomeStorageItems[barCode]
+	if !hasKey {
+		return errors.New("item was not present to remove")
+	}
+	indToRemove := -1
+	for ind, item := range itemlist {
+		if item.UUID == uuid {
+			indToRemove = ind
+			break
+		}
+	}
+	if indToRemove == -1 {
+		return errors.New("item was not present to remove")
+	}
+	if len(itemlist) == 1 {
+		delete(manager.homeStorage.HomeStorageItems, barCode)
+	} else {
+		itemlist[indToRemove] = itemlist[len(itemlist)-1]
+		itemlist = itemlist[:len(itemlist)-1]
+		manager.homeStorage.HomeStorageItems[barCode] = itemlist
+	}
+	manager.saveHsToDb()
+	return nil
 }
 
 func (manager *HomeStorageManager) GetItems(barC int64) []types.StorageItem {

@@ -35,12 +35,11 @@ func main() {
 	e := echo.New()
 	e.GET("/hs", homestorageHandler.GetAllFood)
 	e.POST("/hs/:code", homestorageHandler.AddFood)
-	e.PUT("/hs/:code", homestorageHandler.AddFood)
-	//e.DELETE("/hs/:code", prodHandler.AddFood)
+	e.PUT("/hs/:code", homestorageHandler.UpdateFood)
+	e.DELETE("/hs/:code", homestorageHandler.DeleteFood)
 
 	e.GET("/prod/unverified", prodHandler.GetUnverified)
 	e.GET("/prod/categories", prodHandler.GetCatList)
-	e.PATCH("/prod/:code", prodHandler.GetUnverified)
 	e.GET("/prod/:code", prodHandler.GetProduct)
 	e.POST("/prod", prodHandler.NewProd)
 
