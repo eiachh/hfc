@@ -35,14 +35,49 @@ func (pHandler *ProdHandler) GetProduct(c echo.Context) error {
 }
 
 func (pHandler *ProdHandler) GetUnverified(c echo.Context) error {
-	prod, err := pHandler.prodManager.GetAllUnreviewed()
+	prods, err := pHandler.prodManager.GetAllUnreviewed()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
-	if len(*prod) == 0 {
+	if len(*prods) == 0 {
 		return c.JSON(http.StatusNotFound, "No unreviewed item was found!")
 	}
-	return c.JSON(http.StatusOK, prod)
+	return c.JSON(http.StatusOK, prods)
+}
+
+func (pHandler *ProdHandler) SetUnreviewedImg(c echo.Context) error {
+	barC, convErr := strconv.ParseInt(c.Param("code"), 10, 64)
+	if convErr != nil {
+		return c.JSON(http.StatusBadRequest, convErr)
+	}
+	var requestBody struct {
+		ImgAsBase64 string `json:"imgAsBase64"`
+	}
+	if err := c.Bind(&requestBody); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"message": "Invalid request body",
+		})
+	}
+
+	if err := pHandler.prodManager.SetUnreviewedImg(barC, requestBody.ImgAsBase64); err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(http.StatusOK, "OK")
+}
+
+func (pHandler *ProdHandler) GetUnreviewedImg(c echo.Context) error {
+	barC, convErr := strconv.ParseInt(c.Param("code"), 10, 64)
+	if convErr != nil {
+		return c.JSON(http.StatusBadRequest, convErr)
+	}
+
+	img64, err := pHandler.prodManager.GetUnreviewedImg(barC)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(http.StatusOK, img64)
 }
 
 // Adds a new product to the loc-cache db
@@ -66,9 +101,9 @@ func (pHandler *ProdHandler) DeleteProduct(c echo.Context) error {
 }
 
 func (pHandler *ProdHandler) GetCatList(c echo.Context) error {
-	jsonCat, err := pHandler.prodManager.GetCatListDistinct()
+	catList, err := pHandler.prodManager.GetCatListDistinct()
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusOK, string(*jsonCat))
+	return c.JSON(http.StatusOK, catList)
 }

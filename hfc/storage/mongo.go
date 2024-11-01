@@ -3,6 +3,7 @@ package storage
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -24,8 +25,9 @@ type MongoStorage struct {
 	CacheDatabase string
 	OFFDatabase   string
 
-	ProdCollName string
-	HsCollName   string
+	ProdCollName     string
+	HsCollName       string
+	UnrevImgCollName string
 
 	ConnString string
 	Ctx        context.Context
@@ -33,6 +35,9 @@ type MongoStorage struct {
 }
 
 func NewMongoStorage(uname string, pwd string, host string, port string, offDb string, cacheDb string, authDB string) *MongoStorage {
+	log.Infof("Mongo init with Username: %s, Password: %s, Host: %s, Port: %s, OffDB: %s, CacheDB: %s, AuthDB: %s",
+		uname, pwd, host, port, offDb, cacheDb, authDB)
+
 	// Create a MongoDB URI
 	connString := fmt.Sprintf("mongodb://%s:%s@%s:%s/%s?authSource=%s", uname, pwd, host, port, cacheDb, authDB)
 
@@ -44,38 +49,20 @@ func NewMongoStorage(uname string, pwd string, host string, port string, offDb s
 	}
 
 	return &MongoStorage{
-		username:      uname,
-		password:      pwd,
-		Host:          host,
-		Port:          port,
-		authDB:        authDB,
-		CacheDatabase: cacheDb,
-		OFFDatabase:   offDb,
-		ProdCollName:  "products",
-		HsCollName:    "hs",
-		ConnString:    connString,
-		Ctx:           ctx,
-		Client:        *client,
+		username:         uname,
+		password:         pwd,
+		Host:             host,
+		Port:             port,
+		authDB:           authDB,
+		CacheDatabase:    cacheDb,
+		OFFDatabase:      offDb,
+		ProdCollName:     "products",
+		HsCollName:       "hs",
+		UnrevImgCollName: "unreviewedImg",
+		ConnString:       connString,
+		Ctx:              ctx,
+		Client:           *client,
 	}
-}
-
-func (s *MongoStorage) ALTNewProduct(prod *types.ALTProduct) error {
-	prod.Reviewed = true
-
-	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
-	filter := bson.M{"code": prod.Code}
-
-	_, err := cacheDBCollection.DeleteMany(s.Ctx, filter)
-	if err != nil {
-		return err
-	}
-
-	// TODO HS can save correctly this can only save str?
-	_, err = cacheDBCollection.InsertOne(s.Ctx, prod)
-	if err != nil {
-		return err
-	}
-	return nil
 }
 
 func (s *MongoStorage) NewProduct(prod *types.Product) error {
@@ -95,6 +82,46 @@ func (s *MongoStorage) NewProduct(prod *types.Product) error {
 	return nil
 }
 
+func (s *MongoStorage) NewUnreviewedImg(barCode int64, imgAsBase64 string) error {
+	unrevImgColl := s.Client.Database(s.CacheDatabase).Collection(s.UnrevImgCollName)
+	filter := bson.M{"code": barCode}
+	res, err := s.FindInCollection(filter, unrevImgColl)
+	if err != nil {
+		return err
+	}
+
+	if len(*res) != 0 {
+		return errors.New("img already exists for this barcode")
+	}
+
+	_, err = unrevImgColl.InsertOne(s.Ctx, bson.M{"code": barCode, "imgAsBase64": imgAsBase64})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *MongoStorage) GetUnreviewedImg(barCode int64) (string, error) {
+	unrevImgColl := s.Client.Database(s.CacheDatabase).Collection(s.UnrevImgCollName)
+	filter := bson.M{"code": barCode}
+	res, err := s.FindInCollection(filter, unrevImgColl)
+	if err != nil {
+		return "", err
+	}
+
+	if len(*res) == 0 {
+		return "", errors.New("img does not exists for this barcode")
+	} else if len(*res) > 1 {
+		return "", errors.New("multiple images are stored for a single barcode")
+	}
+
+	img64, ok := (*res)[0]["imgAsBase64"].(string)
+	if !ok {
+		return "", errors.New("img does not exists for this barcode")
+	}
+	return img64, nil
+}
+
 func (s *MongoStorage) SaveHomeStorage(hs *types.HomeStorage) error {
 	hsDbCollection := s.Client.Database(s.CacheDatabase).Collection(s.HsCollName)
 	filter := bson.M{}
@@ -103,6 +130,21 @@ func (s *MongoStorage) SaveHomeStorage(hs *types.HomeStorage) error {
 		return err
 	}
 	return nil
+}
+
+func (s *MongoStorage) GetAllProduct() *[]types.Product {
+	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
+	cacheDBResults, findErr := s.FindInCollection(bson.M{}, cacheDBCollection)
+
+	if findErr != nil {
+		log.Error(findErr)
+		return nil
+	}
+
+	var product []types.Product
+	jsonData, _ := json.Marshal(*cacheDBResults)
+	json.Unmarshal([]byte(jsonData), &product)
+	return &product
 }
 
 // GetByBarCode searches for a product in both the cache and OFF databases based on a barcode.

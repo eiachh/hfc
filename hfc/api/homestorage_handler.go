@@ -32,25 +32,24 @@ func (hsh *HsHandler) AddFood(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, convErr)
 	}
 	var requestBody struct {
-		Amount string `json:"amount"`
+		Amount int `json:"amount"`
 	}
-	if err := c.Bind(&requestBody); err != nil || requestBody.Amount == "" {
+	if err := c.Bind(&requestBody); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{
 			"message": "Invalid request body",
 		})
 	}
 
-	amount := requestBody.Amount
-	amntInt, convErr := strconv.Atoi(amount)
-	if convErr != nil {
-		amntInt = 1
-	}
-	err := hsh.hsAddFood(barC, amntInt)
+	reqImg, err := hsh.hsAddFood(barC, requestBody.Amount)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	return c.String(http.StatusOK, "Added "+strconv.FormatInt(barC, 10)+", amnt: "+amount)
+	if reqImg {
+		return c.JSON(http.StatusPartialContent, "require img for verification")
+	}
+
+	return c.JSON(http.StatusOK, barC)
 }
 
 func (hsh *HsHandler) UpdateFood(c echo.Context) error {
@@ -94,12 +93,16 @@ func (hsh *HsHandler) DeleteFood(c echo.Context) error {
 	return c.JSON(http.StatusOK, "ok")
 }
 
-func (hsh *HsHandler) hsAddFood(barC int64, amnt int) error {
-	prod, err := hsh.ProductMan.GetOrRegisterProduct(barC)
+func (hsh *HsHandler) hsAddFood(barC int64, amnt int) (bool, error) {
+	//MOCK
+	return true, nil
+	//MOCK
+
+	prod, reqImg, err := hsh.ProductMan.GetOrRegisterProduct(barC)
 	if err != nil {
-		return err
+		return false, err
 	}
 
 	hsh.HomeStorageManager.InsertProd(amnt, prod)
-	return nil
+	return reqImg, nil
 }

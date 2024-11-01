@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hfc.fullname" . }}
+  labels:
+    {{- include "hfc.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 30021
+      protocol: TCP
+      name: http
+      {{- if (eq .Values.service.type "NodePort") }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
+  selector:
+    {{- include "hfc.selectorLabels" . | nindent 4 }}

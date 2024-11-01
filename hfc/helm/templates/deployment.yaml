@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hfc.fullname" . }}
+  labels:
+    {{- include "hfc.labels" . | nindent 4 }}
+spec:
+  # SINGLE POD INSTANCE! NO TOUCHY
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "hfc.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "hfc.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "hfc.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          command: ["hfc", "--localdb", "false"]
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: SERVER_PORT
+              value: {{ .Values.service.port | quote }}
+            - name: MONGODB_USER
+              value: {{ .Values.env.mongo.user | quote }}
+            - name: MONGODB_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-mongodb
+                  key: mongodb-root-password
+            - name: HOST
+              value: {{ .Values.env.mongo.host | quote }}
+            - name: PORT
+              value: {{ .Values.env.mongo.port | quote }}
+            - name: AUTH_DB
+              value: {{ .Values.env.mongo.authDB | quote }}
+            - name: OFF_DB
+              value: {{ .Values.env.mongo.offDB | quote }}
+            - name: CACHE_DB
+              value: {{ .Values.env.mongo.cacheDB | quote }}                                                                  
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
