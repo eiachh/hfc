@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -36,7 +37,7 @@ func (hsh *HsHandler) AddFood(c echo.Context) error {
 	}
 	if err := c.Bind(&requestBody); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{
-			"message": "Invalid request body",
+			"error": fmt.Sprintf("Invalid request body. %s", err),
 		})
 	}
 
@@ -46,10 +47,14 @@ func (hsh *HsHandler) AddFood(c echo.Context) error {
 	}
 
 	if reqImg {
-		return c.JSON(http.StatusPartialContent, "require img for verification")
+		return c.JSON(http.StatusPartialContent, map[string]string{
+			"message": "require img for verification",
+		})
 	}
 
-	return c.JSON(http.StatusOK, barC)
+	return c.JSON(http.StatusOK, map[string]int64{
+		"message": barC,
+	})
 }
 
 func (hsh *HsHandler) UpdateFood(c echo.Context) error {
@@ -57,10 +62,11 @@ func (hsh *HsHandler) UpdateFood(c echo.Context) error {
 	if convErr != nil {
 		return c.JSON(http.StatusBadRequest, convErr)
 	}
+
 	var requestBodyAsStorItem *types.StorageItem
 	if err := c.Bind(&requestBodyAsStorItem); err != nil || requestBodyAsStorItem == nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{
-			"message": "Invalid request body",
+			"error": fmt.Sprintf("Invalid request body. %s", err),
 		})
 	}
 
@@ -68,7 +74,9 @@ func (hsh *HsHandler) UpdateFood(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
-	return c.JSON(http.StatusOK, "ok")
+	return c.JSON(http.StatusOK, map[string]string{
+		"message": "ok",
+	})
 }
 
 func (hsh *HsHandler) DeleteFood(c echo.Context) error {
@@ -81,7 +89,7 @@ func (hsh *HsHandler) DeleteFood(c echo.Context) error {
 	}
 	if err := c.Bind(&requestBody); err != nil || requestBody.Uuid == "" {
 		return c.JSON(http.StatusBadRequest, map[string]string{
-			"message": "Invalid request body",
+			"error": fmt.Sprintf("Invalid request body. %s", err),
 		})
 	}
 
@@ -90,14 +98,12 @@ func (hsh *HsHandler) DeleteFood(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
-	return c.JSON(http.StatusOK, "ok")
+	return c.JSON(http.StatusOK, map[string]string{
+		"message": "ok",
+	})
 }
 
 func (hsh *HsHandler) hsAddFood(barC int64, amnt int) (bool, error) {
-	//MOCK
-	return true, nil
-	//MOCK
-
 	prod, reqImg, err := hsh.ProductMan.GetOrRegisterProduct(barC)
 	if err != nil {
 		return false, err

@@ -19,3 +19,10 @@ func (catHItem *CategoryHierarchy) ToString() string {
 	}
 	return catHItem.Parent.ToString() + "/" + catHItem.Name
 }
+
+func (catHItem *CategoryHierarchy) AsSlice() []string {
+	if catHItem.Parent == nil {
+		return []string{catHItem.Name}
+	}
+	return append(catHItem.Parent.AsSlice(), catHItem.Name)
+}

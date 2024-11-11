@@ -79,11 +79,11 @@ func Ready(c echo.Context) error {
 }
 
 func Init() {
-	prod_enabled := flag.String("prod_enabled", "false", "IF enabled it uses the actual structure like openapi.")
+	use_openai := flag.String("use_openai", "false", "IF enabled it uses the actual structure like openapi.")
 	localDb := flag.String("localdb", "true", "IF enabled it uses a loal db instead of reading everything from env vars. Used when not on helm")
 	flag.Parse()
 
-	if *prod_enabled == "true" {
+	if *use_openai == "true" {
 		aiCaller = service.NewChatGptAiCaller()
 	} else {
 		aiCaller = service.NewMockAiCaller()

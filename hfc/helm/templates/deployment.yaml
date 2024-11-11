@@ -27,7 +27,7 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          command: ["hfc", "--localdb", "false"]
+          command: ["hfc", "--localdb", "false", "--use_openai", {{ .Values.openApi.enabled | quote }}]
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -37,14 +37,18 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            httpGet:
+              path: /healthy
+              port: 30021
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            httpGet:
+              path: /ready
+              port: 30021
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: SERVER_PORT
-              value: {{ .Values.service.port | quote }}
+              value: "30021"
             - name: MONGODB_USER
               value: {{ .Values.env.mongo.user | quote }}
             - name: MONGODB_PWD

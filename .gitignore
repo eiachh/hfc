@@ -1,6 +1,12 @@
 # My local bs files
 tmp/
 launch.json
+log.html
+output.xml
+report.html
+interactive_console_output.xml
+chatgptREQUEST.txt
+chatgptRESPONSE3.txt
 
 # If you prefer the allow list template instead of the deny list, see community template:
 # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore

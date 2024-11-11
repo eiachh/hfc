@@ -1,0 +1,2274 @@
+{
+    "code": "8713600286072",
+    "product": {
+      "_id": "8713600286072",
+      "_keywords": [
+        "bonbon",
+        "snack",
+        "gelifie",
+        "candy",
+        "sushi",
+        "sucre",
+        "look",
+        "confiserie",
+        "mini"
+      ],
+      "added_countries_tags": [],
+      "additives_debug_tags": [],
+      "additives_n": 13,
+      "additives_old_n": 12,
+      "additives_old_tags": [
+        "en:e428",
+        "en:e330",
+        "en:e270",
+        "en:e14xx",
+        "en:e901",
+        "en:e150d",
+        "en:e120",
+        "en:e133",
+        "en:e131",
+        "en:e306",
+        "en:e331",
+        "en:e440"
+      ],
+      "additives_original_tags": [
+        "en:e428",
+        "en:e420",
+        "en:e330",
+        "en:e270",
+        "en:e14xx",
+        "en:e901",
+        "en:e150d",
+        "en:e120",
+        "en:e133",
+        "en:e131",
+        "en:e306",
+        "en:e331",
+        "en:e440"
+      ],
+      "additives_prev_original_tags": [],
+      "additives_tags": [
+        "en:e120",
+        "en:e131",
+        "en:e133",
+        "en:e14xx",
+        "en:e150d",
+        "en:e270",
+        "en:e306",
+        "en:e330",
+        "en:e331",
+        "en:e420",
+        "en:e428",
+        "en:e440",
+        "en:e901"
+      ],
+      "allergens": "",
+      "allergens_from_ingredients": "en:gluten, froment",
+      "allergens_from_user": "(fr) ",
+      "allergens_hierarchy": [
+        "en:gluten"
+      ],
+      "allergens_tags": [
+        "en:gluten"
+      ],
+      "amino_acids_prev_tags": [],
+      "amino_acids_tags": [],
+      "brands": "Look O Look",
+      "brands_tags": [
+        "look-o-look"
+      ],
+      "categories": "Snacks, Snacks sucrés, Confiseries, Bonbons, Bonbons gélifiés",
+      "categories_hierarchy": [
+        "en:snacks",
+        "en:sweet-snacks",
+        "en:confectioneries",
+        "en:candies",
+        "en:gummi-candies"
+      ],
+      "categories_lc": "fr",
+      "categories_old": "Snacks, Snacks sucrés, Confiseries, Bonbons, Bonbons gélifiés",
+      "categories_properties": {
+        "agribalyse_food_code:en": "31060",
+        "ciqual_food_code:en": "31060"
+      },
+      "categories_properties_tags": [
+        "all-products",
+        "categories-known",
+        "agribalyse-food-code-31060",
+        "agribalyse-food-code-known",
+        "agribalyse-proxy-food-code-unknown",
+        "ciqual-food-code-31060",
+        "ciqual-food-code-known",
+        "agribalyse-known",
+        "agribalyse-31060"
+      ],
+      "categories_tags": [
+        "en:snacks",
+        "en:sweet-snacks",
+        "en:confectioneries",
+        "en:candies",
+        "en:gummi-candies"
+      ],
+      "category_properties": {
+  
+      },
+      "checkers_tags": [],
+      "ciqual_food_name_tags": [
+        "unknown"
+      ],
+      "code": "8713600286072",
+      "codes_tags": [
+        "code-13",
+        "8713600286xxx",
+        "871360028xxxx",
+        "87136002xxxxx",
+        "8713600xxxxxx",
+        "871360xxxxxxx",
+        "87136xxxxxxxx",
+        "8713xxxxxxxxx",
+        "871xxxxxxxxxx",
+        "87xxxxxxxxxxx",
+        "8xxxxxxxxxxxx"
+      ],
+      "compared_to_category": "en:gummi-candies",
+      "complete": 0,
+      "completeness": 0.775,
+      "correctors_tags": [
+        "yuka.Zkp3R1BLbGJxUGNObS9NczlDalU2b041NThhMmRGaVhNK01ESWc9PQ",
+        "magasins-u",
+        "openfoodfacts-contributors",
+        "teolemon",
+        "evegn64",
+        "inf"
+      ],
+      "countries": "France, Qatar",
+      "countries_debug_tags": [],
+      "countries_hierarchy": [
+        "en:france",
+        "en:qatar"
+      ],
+      "countries_lc": "en",
+      "countries_tags": [
+        "en:france",
+        "en:qatar"
+      ],
+      "created_t": 1530537541,
+      "creator": "openfoodfacts-contributors",
+      "data_quality_bugs_tags": [],
+      "data_quality_errors_tags": [],
+      "data_quality_info_tags": [
+        "en:no-packaging-data",
+        "en:ingredients-percent-analysis-ok",
+        "en:ecoscore-extended-data-not-computed",
+        "en:food-groups-1-known",
+        "en:food-groups-2-known",
+        "en:food-groups-3-unknown"
+      ],
+      "data_quality_tags": [
+        "en:no-packaging-data",
+        "en:ingredients-percent-analysis-ok",
+        "en:ecoscore-extended-data-not-computed",
+        "en:food-groups-1-known",
+        "en:food-groups-2-known",
+        "en:food-groups-3-unknown",
+        "en:ingredients-en-ending-comma",
+        "en:ingredients-fr-ending-comma",
+        "en:ecoscore-origins-of-ingredients-origins-are-100-percent-unknown",
+        "en:ecoscore-packaging-packaging-data-missing",
+        "en:ecoscore-production-system-no-label"
+      ],
+      "data_quality_warnings_tags": [
+        "en:ingredients-en-ending-comma",
+        "en:ingredients-fr-ending-comma",
+        "en:ecoscore-origins-of-ingredients-origins-are-100-percent-unknown",
+        "en:ecoscore-packaging-packaging-data-missing",
+        "en:ecoscore-production-system-no-label"
+      ],
+      "data_sources": "App - yuka, Apps, App - InFood, App - Open Food Facts",
+      "data_sources_tags": [
+        "app-yuka",
+        "apps",
+        "app-infood",
+        "app-open-food-facts"
+      ],
+      "ecoscore_data": {
+        "adjustments": {
+          "origins_of_ingredients": {
+            "aggregated_origins": [
+              {
+                "epi_score": "0",
+                "origin": "en:unknown",
+                "percent": 100,
+                "transportation_score": null
+              }
+            ],
+            "epi_score": 0,
+            "epi_value": -5,
+            "origins_from_categories": [
+              "en:unknown"
+            ],
+            "origins_from_origins_field": [
+              "en:unknown"
+            ],
+            "transportation_score": 0,
+            "transportation_scores": {
+              "ad": 0,
+              "al": 0,
+              "at": 0,
+              "ax": 0,
+              "ba": 0,
+              "be": 0,
+              "bg": 0,
+              "ch": 0,
+              "cy": 0,
+              "cz": 0,
+              "de": 0,
+              "dk": 0,
+              "dz": 0,
+              "ee": 0,
+              "eg": 0,
+              "es": 0,
+              "fi": 0,
+              "fo": 0,
+              "fr": 0,
+              "gg": 0,
+              "gi": 0,
+              "gr": 0,
+              "hr": 0,
+              "hu": 0,
+              "ie": 0,
+              "il": 0,
+              "im": 0,
+              "is": 0,
+              "it": 0,
+              "je": 0,
+              "lb": 0,
+              "li": 0,
+              "lt": 0,
+              "lu": 0,
+              "lv": 0,
+              "ly": 0,
+              "ma": 0,
+              "mc": 0,
+              "md": 0,
+              "me": 0,
+              "mk": 0,
+              "mt": 0,
+              "nl": 0,
+              "no": 0,
+              "pl": 0,
+              "ps": 0,
+              "pt": 0,
+              "ro": 0,
+              "rs": 0,
+              "se": 0,
+              "si": 0,
+              "sj": 0,
+              "sk": 0,
+              "sm": 0,
+              "sy": 0,
+              "tn": 0,
+              "tr": 0,
+              "ua": 0,
+              "uk": 0,
+              "us": 0,
+              "va": 0,
+              "world": 0,
+              "xk": 0
+            },
+            "transportation_value": 0,
+            "transportation_values": {
+              "ad": 0,
+              "al": 0,
+              "at": 0,
+              "ax": 0,
+              "ba": 0,
+              "be": 0,
+              "bg": 0,
+              "ch": 0,
+              "cy": 0,
+              "cz": 0,
+              "de": 0,
+              "dk": 0,
+              "dz": 0,
+              "ee": 0,
+              "eg": 0,
+              "es": 0,
+              "fi": 0,
+              "fo": 0,
+              "fr": 0,
+              "gg": 0,
+              "gi": 0,
+              "gr": 0,
+              "hr": 0,
+              "hu": 0,
+              "ie": 0,
+              "il": 0,
+              "im": 0,
+              "is": 0,
+              "it": 0,
+              "je": 0,
+              "lb": 0,
+              "li": 0,
+              "lt": 0,
+              "lu": 0,
+              "lv": 0,
+              "ly": 0,
+              "ma": 0,
+              "mc": 0,
+              "md": 0,
+              "me": 0,
+              "mk": 0,
+              "mt": 0,
+              "nl": 0,
+              "no": 0,
+              "pl": 0,
+              "ps": 0,
+              "pt": 0,
+              "ro": 0,
+              "rs": 0,
+              "se": 0,
+              "si": 0,
+              "sj": 0,
+              "sk": 0,
+              "sm": 0,
+              "sy": 0,
+              "tn": 0,
+              "tr": 0,
+              "ua": 0,
+              "uk": 0,
+              "us": 0,
+              "va": 0,
+              "world": 0,
+              "xk": 0
+            },
+            "value": -5,
+            "values": {
+              "ad": -5,
+              "al": -5,
+              "at": -5,
+              "ax": -5,
+              "ba": -5,
+              "be": -5,
+              "bg": -5,
+              "ch": -5,
+              "cy": -5,
+              "cz": -5,
+              "de": -5,
+              "dk": -5,
+              "dz": -5,
+              "ee": -5,
+              "eg": -5,
+              "es": -5,
+              "fi": -5,
+              "fo": -5,
+              "fr": -5,
+              "gg": -5,
+              "gi": -5,
+              "gr": -5,
+              "hr": -5,
+              "hu": -5,
+              "ie": -5,
+              "il": -5,
+              "im": -5,
+              "is": -5,
+              "it": -5,
+              "je": -5,
+              "lb": -5,
+              "li": -5,
+              "lt": -5,
+              "lu": -5,
+              "lv": -5,
+              "ly": -5,
+              "ma": -5,
+              "mc": -5,
+              "md": -5,
+              "me": -5,
+              "mk": -5,
+              "mt": -5,
+              "nl": -5,
+              "no": -5,
+              "pl": -5,
+              "ps": -5,
+              "pt": -5,
+              "ro": -5,
+              "rs": -5,
+              "se": -5,
+              "si": -5,
+              "sj": -5,
+              "sk": -5,
+              "sm": -5,
+              "sy": -5,
+              "tn": -5,
+              "tr": -5,
+              "ua": -5,
+              "uk": -5,
+              "us": -5,
+              "va": -5,
+              "world": -5,
+              "xk": -5
+            },
+            "warning": "origins_are_100_percent_unknown"
+          },
+          "packaging": {
+            "non_recyclable_and_non_biodegradable_materials": 1,
+            "value": -15,
+            "warning": "packaging_data_missing"
+          },
+          "production_system": {
+            "labels": [],
+            "value": 0,
+            "warning": "no_label"
+          },
+          "threatened_species": {
+            "ingredient": "en:palm-oil",
+            "value": -10
+          }
+        },
+        "agribalyse": {
+          "agribalyse_food_code": "31060",
+          "co2_agriculture": 0.57824594,
+          "co2_consumption": 0,
+          "co2_distribution": 0.017321188,
+          "co2_packaging": 0.18575949,
+          "co2_processing": 0.59633057,
+          "co2_total": 1.565236548,
+          "co2_transportation": 0.18757936,
+          "code": "31060",
+          "dqr": "2.35",
+          "ef_agriculture": 0.10599907,
+          "ef_consumption": 0,
+          "ef_distribution": 0.0046415086,
+          "ef_packaging": 0.01568157,
+          "ef_processing": 0.063798263,
+          "ef_total": 0.2051793566,
+          "ef_transportation": 0.015058945,
+          "is_beverage": 0,
+          "name_en": "Jelly candy",
+          "name_fr": "Bonbon gélifié",
+          "score": 89,
+          "version": "3.1"
+        },
+        "grade": "c",
+        "grades": {
+          "ad": "c",
+          "al": "c",
+          "at": "c",
+          "ax": "c",
+          "ba": "c",
+          "be": "c",
+          "bg": "c",
+          "ch": "c",
+          "cy": "c",
+          "cz": "c",
+          "de": "c",
+          "dk": "c",
+          "dz": "c",
+          "ee": "c",
+          "eg": "c",
+          "es": "c",
+          "fi": "c",
+          "fo": "c",
+          "fr": "c",
+          "gg": "c",
+          "gi": "c",
+          "gr": "c",
+          "hr": "c",
+          "hu": "c",
+          "ie": "c",
+          "il": "c",
+          "im": "c",
+          "is": "c",
+          "it": "c",
+          "je": "c",
+          "lb": "c",
+          "li": "c",
+          "lt": "c",
+          "lu": "c",
+          "lv": "c",
+          "ly": "c",
+          "ma": "c",
+          "mc": "c",
+          "md": "c",
+          "me": "c",
+          "mk": "c",
+          "mt": "c",
+          "nl": "c",
+          "no": "c",
+          "pl": "c",
+          "ps": "c",
+          "pt": "c",
+          "ro": "c",
+          "rs": "c",
+          "se": "c",
+          "si": "c",
+          "sj": "c",
+          "sk": "c",
+          "sm": "c",
+          "sy": "c",
+          "tn": "c",
+          "tr": "c",
+          "ua": "c",
+          "uk": "c",
+          "us": "c",
+          "va": "c",
+          "world": "c",
+          "xk": "c"
+        },
+        "missing": {
+          "labels": 1,
+          "origins": 1,
+          "packagings": 1
+        },
+        "missing_data_warning": 1,
+        "missing_key_data": 1,
+        "previous_data": {
+          "agribalyse": {
+            "agribalyse_food_code": "31060",
+            "co2_agriculture": 2.1277843,
+            "co2_consumption": 0,
+            "co2_distribution": 0.014104999,
+            "co2_packaging": 0.2752397,
+            "co2_processing": 0.28750323,
+            "co2_total": 2.9115727,
+            "co2_transportation": 0.20694049,
+            "code": "31060",
+            "dqr": "3.64",
+            "ef_agriculture": 0.82681788,
+            "ef_consumption": 0,
+            "ef_distribution": 0.0045906531,
+            "ef_packaging": 0.020545657,
+            "ef_processing": 0.045350868,
+            "ef_total": 0.91567794,
+            "ef_transportation": 0.018372886,
+            "is_beverage": 0,
+            "name_en": "Jelly candy",
+            "name_fr": "Bonbon gélifié",
+            "score": 34
+          },
+          "grade": "e",
+          "score": 4
+        },
+        "score": 59,
+        "scores": {
+          "ad": 59,
+          "al": 59,
+          "at": 59,
+          "ax": 59,
+          "ba": 59,
+          "be": 59,
+          "bg": 59,
+          "ch": 59,
+          "cy": 59,
+          "cz": 59,
+          "de": 59,
+          "dk": 59,
+          "dz": 59,
+          "ee": 59,
+          "eg": 59,
+          "es": 59,
+          "fi": 59,
+          "fo": 59,
+          "fr": 59,
+          "gg": 59,
+          "gi": 59,
+          "gr": 59,
+          "hr": 59,
+          "hu": 59,
+          "ie": 59,
+          "il": 59,
+          "im": 59,
+          "is": 59,
+          "it": 59,
+          "je": 59,
+          "lb": 59,
+          "li": 59,
+          "lt": 59,
+          "lu": 59,
+          "lv": 59,
+          "ly": 59,
+          "ma": 59,
+          "mc": 59,
+          "md": 59,
+          "me": 59,
+          "mk": 59,
+          "mt": 59,
+          "nl": 59,
+          "no": 59,
+          "pl": 59,
+          "ps": 59,
+          "pt": 59,
+          "ro": 59,
+          "rs": 59,
+          "se": 59,
+          "si": 59,
+          "sj": 59,
+          "sk": 59,
+          "sm": 59,
+          "sy": 59,
+          "tn": 59,
+          "tr": 59,
+          "ua": 59,
+          "uk": 59,
+          "us": 59,
+          "va": 59,
+          "world": 59,
+          "xk": 59
+        },
+        "status": "known"
+      },
+      "ecoscore_grade": "c",
+      "ecoscore_score": 59,
+      "ecoscore_tags": [
+        "c"
+      ],
+      "editors_tags": [
+        "openfoodfacts-contributors",
+        "yuka.Zkp3R1BLbGJxUGNObS9NczlDalU2b041NThhMmRGaVhNK01ESWc9PQ",
+        "inf",
+        "teolemon",
+        "kiliweb",
+        "evegn64",
+        "magasins-u"
+      ],
+      "entry_dates_tags": [
+        "2018-07-02",
+        "2018-07",
+        "2018"
+      ],
+      "food_groups": "en:sweets",
+      "food_groups_tags": [
+        "en:sugary-snacks",
+        "en:sweets"
+      ],
+      "id": "8713600286072",
+      "image_front_small_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.200.jpg",
+      "image_front_thumb_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.100.jpg",
+      "image_front_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.400.jpg",
+      "image_ingredients_small_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_en.4.200.jpg",
+      "image_ingredients_thumb_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_en.4.100.jpg",
+      "image_ingredients_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_en.4.400.jpg",
+      "image_nutrition_small_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_en.7.200.jpg",
+      "image_nutrition_thumb_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_en.7.100.jpg",
+      "image_nutrition_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_en.7.400.jpg",
+      "image_small_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.200.jpg",
+      "image_thumb_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.100.jpg",
+      "image_url": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.400.jpg",
+      "images": {
+        "1": {
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 75
+            },
+            "400": {
+              "h": 400,
+              "w": 300
+            },
+            "full": {
+              "h": 1200,
+              "w": 900
+            }
+          },
+          "uploaded_t": 1530637385,
+          "uploader": "kiliweb"
+        },
+        "2": {
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 76
+            },
+            "400": {
+              "h": 400,
+              "w": 306
+            },
+            "full": {
+              "h": 1200,
+              "w": 917
+            }
+          },
+          "uploaded_t": 1530637388,
+          "uploader": "kiliweb"
+        },
+        "3": {
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 75
+            },
+            "400": {
+              "h": 400,
+              "w": 300
+            },
+            "full": {
+              "h": 3226,
+              "w": 2420
+            }
+          },
+          "uploaded_t": 1559231418,
+          "uploader": "openfoodfacts-contributors"
+        },
+        "front_en": {
+          "angle": 0,
+          "geometry": "0x0--8--8",
+          "imgid": "3",
+          "normalize": null,
+          "rev": "11",
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 75
+            },
+            "200": {
+              "h": 200,
+              "w": 150
+            },
+            "400": {
+              "h": 400,
+              "w": 300
+            },
+            "full": {
+              "h": 3226,
+              "w": 2420
+            }
+          },
+          "white_magic": null,
+          "x1": "-1",
+          "x2": "-1",
+          "y1": "-1",
+          "y2": "-1"
+        },
+        "ingredients_en": {
+          "angle": 0,
+          "geometry": "0x0--3--3",
+          "imgid": "1",
+          "normalize": null,
+          "ocr": 1,
+          "orientation": "0",
+          "rev": "4",
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 75
+            },
+            "200": {
+              "h": 200,
+              "w": 150
+            },
+            "400": {
+              "h": 400,
+              "w": 300
+            },
+            "full": {
+              "h": 1200,
+              "w": 900
+            }
+          },
+          "white_magic": null,
+          "x1": "-1",
+          "x2": "-1",
+          "y1": "-1",
+          "y2": "-1"
+        },
+        "ingredients_fr": {
+          "angle": null,
+          "geometry": "0x0-0-0",
+          "imgid": "1",
+          "normalize": "0",
+          "ocr": 1,
+          "orientation": "0",
+          "rev": "5",
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 75
+            },
+            "200": {
+              "h": 200,
+              "w": 150
+            },
+            "400": {
+              "h": 400,
+              "w": 300
+            },
+            "full": {
+              "h": 1200,
+              "w": 900
+            }
+          },
+          "white_magic": "0",
+          "x1": null,
+          "x2": null,
+          "y1": null,
+          "y2": null
+        },
+        "nutrition_en": {
+          "angle": 0,
+          "geometry": "0x0--2--3",
+          "imgid": "2",
+          "normalize": null,
+          "ocr": 1,
+          "orientation": "0",
+          "rev": "7",
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 76
+            },
+            "200": {
+              "h": 200,
+              "w": 153
+            },
+            "400": {
+              "h": 400,
+              "w": 306
+            },
+            "full": {
+              "h": 1200,
+              "w": 917
+            }
+          },
+          "white_magic": null,
+          "x1": "-1",
+          "x2": "-1",
+          "y1": "-1",
+          "y2": "-1"
+        },
+        "nutrition_fr": {
+          "angle": null,
+          "geometry": "0x0-0-0",
+          "imgid": "2",
+          "normalize": "0",
+          "ocr": 1,
+          "orientation": "0",
+          "rev": "8",
+          "sizes": {
+            "100": {
+              "h": 100,
+              "w": 76
+            },
+            "200": {
+              "h": 200,
+              "w": 153
+            },
+            "400": {
+              "h": 400,
+              "w": 306
+            },
+            "full": {
+              "h": 1200,
+              "w": 917
+            }
+          },
+          "white_magic": "0",
+          "x1": null,
+          "x2": null,
+          "y1": null,
+          "y2": null
+        }
+      },
+      "informers_tags": [
+        "openfoodfacts-contributors",
+        "yuka.Zkp3R1BLbGJxUGNObS9NczlDalU2b041NThhMmRGaVhNK01ESWc9PQ",
+        "kiliweb",
+        "magasins-u",
+        "teolemon",
+        "evegn64",
+        "inf"
+      ],
+      "ingredients": [
+        {
+          "ciqual_proxy_food_code": "31016",
+          "id": "en:sugar",
+          "percent_estimate": 51.9230769230769,
+          "percent_max": 100,
+          "percent_min": 3.84615384615385,
+          "text": "Sucre",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "ciqual_proxy_food_code": "31016",
+          "id": "en:glucose-syrup",
+          "percent_estimate": 24.0384615384615,
+          "percent_max": 50,
+          "percent_min": 0,
+          "text": "sirop de glucose",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "id": "fr:sirop-ins-de-glucose-fructose",
+          "percent_estimate": 12.0192307692308,
+          "percent_max": 33.3333333333333,
+          "percent_min": 0,
+          "text": "sirop Ins de glucose-fructose"
+        },
+        {
+          "ciqual_proxy_food_code": "9410",
+          "id": "en:wheat-flour",
+          "percent_estimate": 6.00961538461539,
+          "percent_max": 25,
+          "percent_min": 0,
+          "text": "farine de froment",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "id": "fr:fr-eau",
+          "percent_estimate": 3.00480769230769,
+          "percent_max": 20,
+          "percent_min": 0,
+          "text": "fr eau"
+        },
+        {
+          "id": "en:e428",
+          "percent_estimate": 1.50240384615385,
+          "percent_max": 16.6666666666667,
+          "percent_min": 0,
+          "text": "gélatine",
+          "vegan": "no",
+          "vegetarian": "no"
+        },
+        {
+          "ciqual_proxy_food_code": "9510",
+          "id": "en:starch",
+          "percent_estimate": 0.75120192307692,
+          "percent_max": 14.2857142857143,
+          "percent_min": 0,
+          "text": "fécule",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "id": "en:stabiliser",
+          "ingredients": [
+            {
+              "id": "en:e420",
+              "percent_estimate": 0.18780048076923,
+              "percent_max": 12.5,
+              "percent_min": 0,
+              "text": "sorbitols",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            },
+            {
+              "id": "fr:st-glycerol",
+              "percent_estimate": 0.18780048076923,
+              "percent_max": 6.25,
+              "percent_min": 0,
+              "text": "St glycerol"
+            }
+          ],
+          "percent_estimate": 0.37560096153846,
+          "percent_max": 12.5,
+          "percent_min": 0,
+          "text": "stabilisants"
+        },
+        {
+          "id": "en:acid",
+          "ingredients": [
+            {
+              "id": "en:e330",
+              "percent_estimate": 0.0939002403846132,
+              "percent_max": 11.1111111111111,
+              "percent_min": 0,
+              "text": "acide citrique",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            },
+            {
+              "id": "fr:acideg-malique",
+              "percent_estimate": 0.0469501201923066,
+              "percent_max": 5.55555555555556,
+              "percent_min": 0,
+              "text": "acideg malique"
+            },
+            {
+              "id": "en:e270",
+              "percent_estimate": 0.0234750600961533,
+              "percent_max": 3.7037037037037,
+              "percent_min": 0,
+              "text": "acide lactique",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            },
+            {
+              "id": "fr:acide-fuma",
+              "percent_estimate": 0.0117375300480766,
+              "percent_max": 2.77777777777778,
+              "percent_min": 0,
+              "text": "acide fuma"
+            },
+            {
+              "id": "fr:rique",
+              "percent_estimate": 0.0117375300480766,
+              "percent_max": 2.22222222222222,
+              "percent_min": 0,
+              "text": "rique"
+            }
+          ],
+          "percent_estimate": 0.187800480769226,
+          "percent_max": 11.1111111111111,
+          "percent_min": 0,
+          "text": "acidifiants"
+        },
+        {
+          "ciqual_proxy_food_code": "31016",
+          "id": "en:dextrose",
+          "percent_estimate": 0.0939002403846132,
+          "percent_max": 10,
+          "percent_min": 0,
+          "text": "dextrose",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "from_palm_oil": "maybe",
+          "id": "en:vegetable-oil",
+          "ingredients": [
+            {
+              "id": "fr:noix-de-ta-coco",
+              "percent_estimate": 0.0234750600961533,
+              "percent_max": 9.09090909090909,
+              "percent_min": 0,
+              "text": "noix de ta COCO"
+            },
+            {
+              "ciqual_food_code": "16129",
+              "from_palm_oil": "yes",
+              "id": "en:palm",
+              "percent_estimate": 0.0234750600961533,
+              "percent_max": 4.54545454545455,
+              "percent_min": 0,
+              "text": "palme",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            }
+          ],
+          "percent_estimate": 0.0469501201923066,
+          "percent_max": 9.09090909090909,
+          "percent_min": 0,
+          "text": "huiles végétales",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "ciqual_food_code": "13112",
+          "id": "en:concentrated-grape-juice",
+          "percent_estimate": 0.0234750600961533,
+          "percent_max": 8.33333333333333,
+          "percent_min": 0,
+          "text": "jus de raisin concentré",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "id": "fr:tr-aromes",
+          "percent_estimate": 0.0117375300480802,
+          "percent_max": 7.69230769230769,
+          "percent_min": 0,
+          "text": "tr aromes"
+        },
+        {
+          "ciqual_proxy_food_code": "9510",
+          "id": "en:modified-starch",
+          "percent_estimate": 0.0058687650240401,
+          "percent_max": 7.14285714285714,
+          "percent_min": 0,
+          "text": "amidon modifié",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        },
+        {
+          "id": "fr:agents-d-enro",
+          "percent_estimate": 0.0029343825120236,
+          "percent_max": 6.66666666666667,
+          "percent_min": 0,
+          "text": "agents d'enro"
+        },
+        {
+          "id": "fr:st-bage",
+          "ingredients": [
+            {
+              "id": "en:e901",
+              "percent_estimate": 0.000733595628005901,
+              "percent_max": 6.25,
+              "percent_min": 0,
+              "text": "cire d'abeille blanche et jaune",
+              "vegan": "no",
+              "vegetarian": "yes"
+            },
+            {
+              "id": "fr:cire-vi-de-carnauba",
+              "percent_estimate": 0.000733595628005901,
+              "percent_max": 3.125,
+              "percent_min": 0,
+              "text": "cire Vi de carnauba"
+            }
+          ],
+          "percent_estimate": 0.0014671912560118,
+          "percent_max": 6.25,
+          "percent_min": 0,
+          "text": "St bage"
+        },
+        {
+          "id": "en:colour",
+          "percent_estimate": 0.000733595628005901,
+          "percent_max": 5.88235294117647,
+          "percent_min": 0,
+          "text": "colorants"
+        },
+        {
+          "id": "en:extract",
+          "ingredients": [
+            {
+              "id": "fr:p-paprika",
+              "percent_estimate": 0.000183398907001475,
+              "percent_max": 5.55555555555556,
+              "percent_min": 0,
+              "text": "p paprika"
+            },
+            {
+              "id": "en:e150d",
+              "percent_estimate": 0.000091699453500737,
+              "percent_max": 2.77777777777778,
+              "percent_min": 0,
+              "text": "caramel au sulfite d'ammonium",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            },
+            {
+              "id": "fr:ni-curcumine",
+              "percent_estimate": 0.000045849726750368,
+              "percent_max": 1.85185185185185,
+              "percent_min": 0,
+              "text": "ni curcumine"
+            },
+            {
+              "id": "en:e120",
+              "percent_estimate": 0.000022924863375184,
+              "percent_max": 1.38888888888889,
+              "percent_min": 0,
+              "text": "carmins",
+              "vegan": "no",
+              "vegetarian": "no"
+            },
+            {
+              "id": "en:e133",
+              "percent_estimate": 0.000011462431687592,
+              "percent_max": 1.11111111111111,
+              "percent_min": 0,
+              "text": "bleu brillant FCF",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            },
+            {
+              "id": "fr:b-charbon",
+              "labels": "en:vegan",
+              "percent_estimate": 0.000005731215843796,
+              "percent_max": 0.925925925925926,
+              "percent_min": 0,
+              "text": "b charbon",
+              "vegan": "en:yes",
+              "vegetarian": "en:yes"
+            },
+            {
+              "id": "en:e131",
+              "percent_estimate": 0.000005731215843796,
+              "percent_max": 0.793650793650794,
+              "percent_min": 0,
+              "text": "bleu patenté V",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            }
+          ],
+          "percent_estimate": 0.00036679781400295,
+          "percent_max": 5.55555555555556,
+          "percent_min": 0,
+          "text": "extrait de"
+        },
+        {
+          "id": "fr:pa-concentres-couleur",
+          "ingredients": [
+            {
+              "id": "en:giant-squash",
+              "percent_estimate": 0.000091699453498961,
+              "percent_max": 5.26315789473684,
+              "percent_min": 0,
+              "text": "potiron",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            },
+            {
+              "ciqual_food_code": "20047",
+              "id": "en:tomato",
+              "percent_estimate": 0.00004584972674948,
+              "percent_max": 2.63157894736842,
+              "percent_min": 0,
+              "text": "tomate",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            },
+            {
+              "id": "fr:to-radis",
+              "percent_estimate": 0.00002292486337474,
+              "percent_max": 1.75438596491228,
+              "percent_min": 0,
+              "text": "to radis"
+            },
+            {
+              "ciqual_food_code": "13050",
+              "id": "en:apple",
+              "percent_estimate": 0.00002292486337474,
+              "percent_max": 1.31578947368421,
+              "percent_min": 0,
+              "text": "pomme",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            }
+          ],
+          "percent_estimate": 0.000183398906997922,
+          "percent_max": 5.26315789473684,
+          "percent_min": 0,
+          "text": "pa concentrés-couleur"
+        },
+        {
+          "id": "en:antioxidant",
+          "percent_estimate": 0.000091699453498961,
+          "percent_max": 5,
+          "percent_min": 0,
+          "text": "antioxydants"
+        },
+        {
+          "id": "en:acid",
+          "ingredients": [
+            {
+              "id": "fr:a-ascorbique",
+              "percent_estimate": 0.000022924863372964,
+              "percent_max": 4.76190476190476,
+              "percent_min": 0,
+              "text": "a ascorbique"
+            },
+            {
+              "id": "en:e306",
+              "percent_estimate": 0.000022924863372964,
+              "percent_max": 2.38095238095238,
+              "percent_min": 0,
+              "text": "extrait riche en tocophérols",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            }
+          ],
+          "percent_estimate": 0.000045849726745927,
+          "percent_max": 4.76190476190476,
+          "percent_min": 0,
+          "text": "acide"
+        },
+        {
+          "id": "fr:sl-correcteur-d-acidite",
+          "ingredients": [
+            {
+              "id": "en:sodium-citrate",
+              "percent_estimate": 0.000022924863372964,
+              "percent_max": 4.54545454545455,
+              "percent_min": 0,
+              "text": "citrate de sodium"
+            }
+          ],
+          "percent_estimate": 0.000022924863372964,
+          "percent_max": 4.54545454545455,
+          "percent_min": 0,
+          "text": "SL * correcteur d'acidité"
+        },
+        {
+          "id": "fr:cit-emulsifiant",
+          "ingredients": [
+            {
+              "id": "fr:mono-et-diglycerides-oc-d-acides-gras",
+              "percent_estimate": 0.000011462431686482,
+              "percent_max": 4.34782608695652,
+              "percent_min": 0,
+              "text": "mono- et diglycérides OC d'acides gras"
+            }
+          ],
+          "percent_estimate": 0.000011462431686482,
+          "percent_max": 4.34782608695652,
+          "percent_min": 0,
+          "text": "cit émulsifiant"
+        },
+        {
+          "id": "en:gelling-agent",
+          "ingredients": [
+            {
+              "id": "en:e440a",
+              "percent_estimate": 0.00000573121584324,
+              "percent_max": 4.16666666666667,
+              "percent_min": 0,
+              "text": "pectines",
+              "vegan": "yes",
+              "vegetarian": "yes"
+            }
+          ],
+          "percent_estimate": 0.00000573121584324,
+          "percent_max": 4.16666666666667,
+          "percent_min": 0,
+          "text": "gélifiant"
+        },
+        {
+          "id": "fr:me-er",
+          "percent_estimate": 0.000002865607925173,
+          "percent_max": 4,
+          "percent_min": 0,
+          "text": "me er"
+        },
+        {
+          "from_palm_oil": "no",
+          "id": "en:shea-butter",
+          "percent_estimate": 0.000002865607925173,
+          "percent_max": 3.84615384615385,
+          "percent_min": 0,
+          "text": "beurre de karité",
+          "vegan": "yes",
+          "vegetarian": "yes"
+        }
+      ],
+      "ingredients_analysis": {
+        "en:non-vegan": [
+          "en:e428",
+          "en:e901",
+          "en:e120"
+        ],
+        "en:non-vegetarian": [
+          "en:e428",
+          "en:e120"
+        ],
+        "en:palm-oil": [
+          "en:palm"
+        ],
+        "en:vegan-status-unknown": [
+          "fr:sirop-ins-de-glucose-fructose",
+          "fr:fr-eau",
+          "fr:st-glycerol",
+          "fr:acideg-malique",
+          "fr:acide-fuma",
+          "fr:rique",
+          "fr:noix-de-ta-coco",
+          "fr:tr-aromes",
+          "fr:agents-d-enro",
+          "fr:st-bage",
+          "fr:cire-vi-de-carnauba",
+          "en:extract",
+          "fr:p-paprika",
+          "fr:ni-curcumine",
+          "fr:pa-concentres-couleur",
+          "fr:to-radis",
+          "fr:a-ascorbique",
+          "fr:sl-correcteur-d-acidite",
+          "en:sodium-citrate",
+          "fr:cit-emulsifiant",
+          "fr:mono-et-diglycerides-oc-d-acides-gras",
+          "fr:me-er"
+        ],
+        "en:vegetarian-status-unknown": [
+          "fr:sirop-ins-de-glucose-fructose",
+          "fr:fr-eau",
+          "fr:st-glycerol",
+          "fr:acideg-malique",
+          "fr:acide-fuma",
+          "fr:rique",
+          "fr:noix-de-ta-coco",
+          "fr:tr-aromes",
+          "fr:agents-d-enro",
+          "fr:st-bage",
+          "fr:cire-vi-de-carnauba",
+          "en:extract",
+          "fr:p-paprika",
+          "fr:ni-curcumine",
+          "fr:pa-concentres-couleur",
+          "fr:to-radis",
+          "fr:a-ascorbique",
+          "fr:sl-correcteur-d-acidite",
+          "en:sodium-citrate",
+          "fr:cit-emulsifiant",
+          "fr:mono-et-diglycerides-oc-d-acides-gras",
+          "fr:me-er"
+        ]
+      },
+      "ingredients_analysis_tags": [
+        "en:palm-oil",
+        "en:non-vegan",
+        "en:non-vegetarian"
+      ],
+      "ingredients_debug": [],
+      "ingredients_from_or_that_may_be_from_palm_oil_n": 1,
+      "ingredients_from_palm_oil_n": 1,
+      "ingredients_from_palm_oil_tags": [
+        "huile-de-palme"
+      ],
+      "ingredients_hierarchy": [
+        "en:sugar",
+        "en:added-sugar",
+        "en:disaccharide",
+        "en:glucose-syrup",
+        "en:monosaccharide",
+        "en:glucose",
+        "fr:sirop-ins-de-glucose-fructose",
+        "en:wheat-flour",
+        "en:cereal",
+        "en:flour",
+        "en:wheat",
+        "en:cereal-flour",
+        "fr:fr-eau",
+        "en:e428",
+        "en:starch",
+        "en:stabiliser",
+        "en:acid",
+        "en:dextrose",
+        "en:vegetable-oil",
+        "en:oil-and-fat",
+        "en:vegetable-oil-and-fat",
+        "en:concentrated-grape-juice",
+        "en:fruit",
+        "en:berries",
+        "en:juice",
+        "en:fruit-juice",
+        "en:grape",
+        "en:grape-juice",
+        "fr:tr-aromes",
+        "en:modified-starch",
+        "fr:agents-d-enro",
+        "fr:st-bage",
+        "en:colour",
+        "en:extract",
+        "fr:pa-concentres-couleur",
+        "en:antioxidant",
+        "fr:sl-correcteur-d-acidite",
+        "fr:cit-emulsifiant",
+        "en:gelling-agent",
+        "fr:me-er",
+        "en:shea-butter",
+        "en:vegetable-fat",
+        "en:e420",
+        "fr:st-glycerol",
+        "en:e330",
+        "fr:acideg-malique",
+        "en:e270",
+        "fr:acide-fuma",
+        "fr:rique",
+        "fr:noix-de-ta-coco",
+        "en:palm",
+        "en:palm-oil-and-fat",
+        "en:palm-oil",
+        "en:e901",
+        "fr:cire-vi-de-carnauba",
+        "fr:p-paprika",
+        "en:e150d",
+        "fr:ni-curcumine",
+        "en:e120",
+        "en:e133",
+        "fr:b-charbon",
+        "en:e131",
+        "en:giant-squash",
+        "en:vegetable",
+        "en:fruit-vegetable",
+        "en:tomato",
+        "fr:to-radis",
+        "en:apple",
+        "en:malaceous-fruit",
+        "fr:a-ascorbique",
+        "en:e306",
+        "en:sodium-citrate",
+        "en:minerals",
+        "en:sodium",
+        "fr:mono-et-diglycerides-oc-d-acides-gras",
+        "en:e440a"
+      ],
+      "ingredients_ids_debug": [],
+      "ingredients_n": 53,
+      "ingredients_n_tags": [
+        "53",
+        "51-60"
+      ],
+      "ingredients_original_tags": [
+        "en:sugar",
+        "en:glucose-syrup",
+        "fr:sirop-ins-de-glucose-fructose",
+        "en:wheat-flour",
+        "fr:fr-eau",
+        "en:e428",
+        "en:starch",
+        "en:stabiliser",
+        "en:acid",
+        "en:dextrose",
+        "en:vegetable-oil",
+        "en:concentrated-grape-juice",
+        "fr:tr-aromes",
+        "en:modified-starch",
+        "fr:agents-d-enro",
+        "fr:st-bage",
+        "en:colour",
+        "en:extract",
+        "fr:pa-concentres-couleur",
+        "en:antioxidant",
+        "en:acid",
+        "fr:sl-correcteur-d-acidite",
+        "fr:cit-emulsifiant",
+        "en:gelling-agent",
+        "fr:me-er",
+        "en:shea-butter",
+        "en:e420",
+        "fr:st-glycerol",
+        "en:e330",
+        "fr:acideg-malique",
+        "en:e270",
+        "fr:acide-fuma",
+        "fr:rique",
+        "fr:noix-de-ta-coco",
+        "en:palm",
+        "en:e901",
+        "fr:cire-vi-de-carnauba",
+        "fr:p-paprika",
+        "en:e150d",
+        "fr:ni-curcumine",
+        "en:e120",
+        "en:e133",
+        "fr:b-charbon",
+        "en:e131",
+        "en:giant-squash",
+        "en:tomato",
+        "fr:to-radis",
+        "en:apple",
+        "fr:a-ascorbique",
+        "en:e306",
+        "en:sodium-citrate",
+        "fr:mono-et-diglycerides-oc-d-acides-gras",
+        "en:e440a"
+      ],
+      "ingredients_percent_analysis": 1,
+      "ingredients_tags": [
+        "en:sugar",
+        "en:added-sugar",
+        "en:disaccharide",
+        "en:glucose-syrup",
+        "en:monosaccharide",
+        "en:glucose",
+        "fr:sirop-ins-de-glucose-fructose",
+        "en:wheat-flour",
+        "en:cereal",
+        "en:flour",
+        "en:wheat",
+        "en:cereal-flour",
+        "fr:fr-eau",
+        "en:e428",
+        "en:starch",
+        "en:stabiliser",
+        "en:acid",
+        "en:dextrose",
+        "en:vegetable-oil",
+        "en:oil-and-fat",
+        "en:vegetable-oil-and-fat",
+        "en:concentrated-grape-juice",
+        "en:fruit",
+        "en:berries",
+        "en:juice",
+        "en:fruit-juice",
+        "en:grape",
+        "en:grape-juice",
+        "fr:tr-aromes",
+        "en:modified-starch",
+        "fr:agents-d-enro",
+        "fr:st-bage",
+        "en:colour",
+        "en:extract",
+        "fr:pa-concentres-couleur",
+        "en:antioxidant",
+        "fr:sl-correcteur-d-acidite",
+        "fr:cit-emulsifiant",
+        "en:gelling-agent",
+        "fr:me-er",
+        "en:shea-butter",
+        "en:vegetable-fat",
+        "en:e420",
+        "fr:st-glycerol",
+        "en:e330",
+        "fr:acideg-malique",
+        "en:e270",
+        "fr:acide-fuma",
+        "fr:rique",
+        "fr:noix-de-ta-coco",
+        "en:palm",
+        "en:palm-oil-and-fat",
+        "en:palm-oil",
+        "en:e901",
+        "fr:cire-vi-de-carnauba",
+        "fr:p-paprika",
+        "en:e150d",
+        "fr:ni-curcumine",
+        "en:e120",
+        "en:e133",
+        "fr:b-charbon",
+        "en:e131",
+        "en:giant-squash",
+        "en:vegetable",
+        "en:fruit-vegetable",
+        "en:tomato",
+        "fr:to-radis",
+        "en:apple",
+        "en:malaceous-fruit",
+        "fr:a-ascorbique",
+        "en:e306",
+        "en:sodium-citrate",
+        "en:minerals",
+        "en:sodium",
+        "fr:mono-et-diglycerides-oc-d-acides-gras",
+        "en:e440a"
+      ],
+      "ingredients_text": "Sucre, sirop de glucose, sirop Ins de glucose-fructose, farine de froment, fr eau, gélatine, fécule, stabilisants (sorbitols, St glycerol), acidifiants (acide citrique, acideg malique, acide lactique, acide fuma - rique), dextrose, huiles végétales (noix de ta COCO, palme), jus de raisin concentré, tr aromes, amidon modifié, agents d'enro - St bage (cire d'abeille blanche et jaune, cire Vi de carnauba), colorants (extrait de (p paprika, caramel au sulfite d'ammonium, ni curcumine, carmins, bleu brillant FCF, b charbon végétal, bleu patenté V), pa concentrés-couleur (potiron, tomate, to radis, pomme), antioxydants (acide (a ascorbique, extrait riche en tocophérols), SL * correcteur d'acidité (citrate de sodium), cit émulsifiant (mono - et diglycérides OC d'acides gras), gélifiant (pectines), me er, beurre de karité,",
+      "ingredients_text_en": "sugar, glucose syrup, glucose-fructose syrup, wheat flour, fr water, gelatin, starch, stabilizers (sorbitols, st glycerol), acidifiers (citric acid, malic acid, lactic acid, fuma-ric acid), dextrose, vegetable oils (coconut, palm), concentrated grape juice, tr aromes, modified starch, agents of enro - st bage (white and yellow beeswax, vi wax of carnauba) , dyes (extract of (p paprika, ammonium sulphite caramel, nor curcumin, carmines, brilliant blue fcf, b vegetable charcoal, patented blue v), pa concentrates-color (pumpkin, tomato, to radish, apple), antioxidants (acid (ascorbic acid, extract rich in tocopherols), sl * acidity corrector (sodium citrate), emulsifying cit (mono - and diglycerides oc of fatty acids), gelling agent (pectins), me er, shea butter ,",
+      "ingredients_text_fr": "Sucre, sirop de glucose, sirop Ins de glucose-fructose, farine de froment, fr eau, gélatine, fécule, stabilisants (sorbitols, St glycerol), acidifiants (acide citrique, acideg malique, acide lactique, acide fuma - rique), dextrose, huiles végétales (noix de ta COCO, palme), jus de raisin concentré, tr aromes, amidon modifié, agents d'enro - St bage (cire d'abeille blanche et jaune, cire Vi de carnauba), colorants (extrait de (p paprika, caramel au sulfite d'ammonium, ni curcumine, carmins, bleu brillant FCF, b charbon végétal, bleu patenté V), pa concentrés-couleur (potiron, tomate, to radis, pomme), antioxydants (acide (a ascorbique, extrait riche en tocophérols), SL * correcteur d'acidité (citrate de sodium), cit émulsifiant (mono - et diglycérides OC d'acides gras), gélifiant (pectines), me er, beurre de karité,",
+      "ingredients_text_fr_ocr_1614248266": "Sucre, sirop de glucose, sirop Ins de glucose-fructose, farine de froment, fr eau, gélatine, fécule, stabilisants (sorbitols, St glycerol), acidifiants (acide citrique, acideg malique, acide lactique, acide fuma- rique), dextrose, huiles végétales (noix de ta COCO, palme), jus de raisin concentré, tr aromes, amidon modifié, agents d'enro- St bage (cire d'abeille blanche et jaune, cire Vi de carnauba), colorants (extrait de (p paprika, caramel au sulfite d'ammonium, ni curcumine, carmins, bleu brillant FCF, b charbon végétal, bleu patenté V), pa concentrés-couleur (potiron, tomate, to radis, pomme), antioxydants (acide (a ascorbique, extrait riche en tocophérols), SL * correcteur d'acidité (citrate de sodium), cit émulsifiant (mono - et diglycérides OC d'acides gras), gélifiant (pectines), me er. beurre de karité.",
+      "ingredients_text_fr_ocr_1614248266_result": "Sucre, sirop de glucose, sirop Ins de glucose-fructose, farine de froment, fr eau, gélatine, fécule, stabilisants (sorbitols, St glycerol), acidifiants (acide citrique, acideg malique, acide lactique, acide fuma - rique), dextrose, huiles végétales (noix de ta COCO, palme), jus de raisin concentré, tr aromes, amidon modifié, agents d'enro - St bage (cire d'abeille blanche et jaune, cire Vi de carnauba), colorants (extrait de (p paprika, caramel au sulfite d'ammonium, ni curcumine, carmins, bleu brillant FCF, b charbon végétal, bleu patenté V), pa concentrés-couleur (potiron, tomate, to radis, pomme), antioxydants (acide (a ascorbique, extrait riche en tocophérols), SL * correcteur d'acidité (citrate de sodium), cit émulsifiant (mono - et diglycérides OC d'acides gras), gélifiant (pectines), me er. beurre de karité.",
+      "ingredients_text_with_allergens": "Sucre, sirop de glucose, sirop Ins de glucose-fructose, farine de \u003Cspan class=\"allergen\"\u003Efroment\u003C/span\u003E, fr eau, gélatine, fécule, stabilisants (sorbitols, St glycerol), acidifiants (acide citrique, acideg malique, acide lactique, acide fuma - rique), dextrose, huiles végétales (noix de ta COCO, palme), jus de raisin concentré, tr aromes, amidon modifié, agents d'enro - St bage (cire d'abeille blanche et jaune, cire Vi de carnauba), colorants (extrait de (p paprika, caramel au sulfite d'ammonium, ni curcumine, carmins, bleu brillant FCF, b charbon végétal, bleu patenté V), pa concentrés-couleur (potiron, tomate, to radis, pomme), antioxydants (acide (a ascorbique, extrait riche en tocophérols), SL * correcteur d'acidité (citrate de sodium), cit émulsifiant (mono - et diglycérides OC d'acides gras), gélifiant (pectines), me er, beurre de karité,",
+      "ingredients_text_with_allergens_en": "sugar, glucose syrup, glucose-fructose syrup, \u003Cspan class=\"allergen\"\u003Ewheat flour\u003C/span\u003E, fr water, \u003Cspan class=\"allergen\"\u003Egelatin\u003C/span\u003E, starch, stabilizers (sorbitols, st glycerol), acidifiers (citric acid, malic acid, lactic acid, fuma-ric acid), dextrose, vegetable oils (coconut, palm), concentrated grape juice, tr aromes, modified starch, agents of enro - st bage (white and yellow beeswax, vi wax of carnauba) , dyes (extract of (p paprika, ammonium sulphite caramel, nor curcumin, carmines, brilliant blue fcf, b vegetable charcoal, patented blue v), pa concentrates-color (pumpkin, tomato, to radish, \u003Cspan class=\"allergen\"\u003Eapple\u003C/span\u003E), antioxidants (acid (ascorbic acid, extract rich in tocopherols), sl * acidity corrector (sodium citrate), emulsifying cit (mono - and diglycerides oc of fatty acids), gelling agent (pectins), me er, shea butter ,",
+      "ingredients_text_with_allergens_fr": "Sucre, sirop de glucose, sirop Ins de glucose-fructose, farine de \u003Cspan class=\"allergen\"\u003Efroment\u003C/span\u003E, fr eau, gélatine, fécule, stabilisants (sorbitols, St glycerol), acidifiants (acide citrique, acideg malique, acide lactique, acide fuma - rique), dextrose, huiles végétales (noix de ta COCO, palme), jus de raisin concentré, tr aromes, amidon modifié, agents d'enro - St bage (cire d'abeille blanche et jaune, cire Vi de carnauba), colorants (extrait de (p paprika, caramel au sulfite d'ammonium, ni curcumine, carmins, bleu brillant FCF, b charbon végétal, bleu patenté V), pa concentrés-couleur (potiron, tomate, to radis, pomme), antioxydants (acide (a ascorbique, extrait riche en tocophérols), SL * correcteur d'acidité (citrate de sodium), cit émulsifiant (mono - et diglycérides OC d'acides gras), gélifiant (pectines), me er, beurre de karité,",
+      "ingredients_that_may_be_from_palm_oil_n": 0,
+      "ingredients_that_may_be_from_palm_oil_tags": [],
+      "ingredients_with_specified_percent_n": 0,
+      "ingredients_with_specified_percent_sum": 0,
+      "ingredients_with_unspecified_percent_n": 43,
+      "ingredients_with_unspecified_percent_sum": 100,
+      "ingredients_without_ciqual_codes": [
+        "en:acid",
+        "en:antioxidant",
+        "en:colour",
+        "en:e120",
+        "en:e131",
+        "en:e133",
+        "en:e150d",
+        "en:e270",
+        "en:e306",
+        "en:e330",
+        "en:e420",
+        "en:e428",
+        "en:e440a",
+        "en:e901",
+        "en:extract",
+        "en:gelling-agent",
+        "en:giant-squash",
+        "en:shea-butter",
+        "en:sodium-citrate",
+        "en:stabiliser",
+        "en:vegetable-oil",
+        "fr:a-ascorbique",
+        "fr:acide-fuma",
+        "fr:acideg-malique",
+        "fr:agents-d-enro",
+        "fr:b-charbon",
+        "fr:cire-vi-de-carnauba",
+        "fr:cit-emulsifiant",
+        "fr:fr-eau",
+        "fr:me-er",
+        "fr:mono-et-diglycerides-oc-d-acides-gras",
+        "fr:ni-curcumine",
+        "fr:noix-de-ta-coco",
+        "fr:p-paprika",
+        "fr:pa-concentres-couleur",
+        "fr:rique",
+        "fr:sirop-ins-de-glucose-fructose",
+        "fr:sl-correcteur-d-acidite",
+        "fr:st-bage",
+        "fr:st-glycerol",
+        "fr:to-radis",
+        "fr:tr-aromes"
+      ],
+      "ingredients_without_ciqual_codes_n": 42,
+      "interface_version_created": "20120622",
+      "interface_version_modified": "20150316.jqm2",
+      "known_ingredients_n": 55,
+      "lang": "fr",
+      "languages": {
+        "en:arabic": 1,
+        "en:english": 4,
+        "en:french": 4
+      },
+      "languages_codes": {
+        "ar": 1,
+        "en": 4,
+        "fr": 4
+      },
+      "languages_hierarchy": [
+        "en:arabic",
+        "en:english",
+        "en:french"
+      ],
+      "languages_tags": [
+        "en:arabic",
+        "en:english",
+        "en:french",
+        "en:3",
+        "en:multilingual"
+      ],
+      "last_edit_dates_tags": [
+        "2021-06-12",
+        "2021-06",
+        "2021"
+      ],
+      "last_editor": "inf",
+      "last_image_dates_tags": [
+        "2019-05-30",
+        "2019-05",
+        "2019"
+      ],
+      "last_image_t": 1559231419,
+      "last_modified_by": "inf",
+      "last_modified_t": 1623518712,
+      "last_updated_t": 1707596417,
+      "lc": "fr",
+      "main_countries_tags": [],
+      "max_imgid": "3",
+      "minerals_prev_tags": [],
+      "minerals_tags": [],
+      "misc_tags": [
+        "en:packagings-number-of-components-0",
+        "en:nutrition-no-fiber",
+        "en:nutriscore-computed",
+        "en:nutrition-fruits-vegetables-nuts-estimate-from-ingredients",
+        "en:nutrition-no-fiber-or-fruits-vegetables-nuts",
+        "en:nutrition-fruits-vegetables-legumes-estimate-from-ingredients",
+        "en:nutriscore-2021-different-from-2023",
+        "en:nutriscore-2021-better-than-2023",
+        "en:nutriscore-2021-d-2023-e",
+        "en:packagings-not-complete",
+        "en:packagings-empty",
+        "en:ecoscore-extended-data-not-computed",
+        "en:ecoscore-missing-data-warning",
+        "en:ecoscore-missing-data-labels",
+        "en:ecoscore-missing-data-origins",
+        "en:ecoscore-missing-data-packagings",
+        "en:ecoscore-missing-data-no-packagings",
+        "en:ecoscore-computed",
+        "en:ecoscore-changed",
+        "en:ecoscore-grade-changed"
+      ],
+      "no_nutrition_data": "",
+      "nova_group": 4,
+      "nova_group_debug": "",
+      "nova_groups": "4",
+      "nova_groups_markers": {
+        "3": [
+          [
+            "categories",
+            "en:candies"
+          ],
+          [
+            "ingredients",
+            "en:starch"
+          ],
+          [
+            "ingredients",
+            "en:sugar"
+          ],
+          [
+            "ingredients",
+            "en:vegetable-fat"
+          ],
+          [
+            "ingredients",
+            "en:vegetable-oil"
+          ],
+          [
+            "categories",
+            "en:sweet-snacks"
+          ]
+        ],
+        "4": [
+          [
+            "additives",
+            "en:e120"
+          ],
+          [
+            "additives",
+            "en:e131"
+          ],
+          [
+            "additives",
+            "en:e133"
+          ],
+          [
+            "additives",
+            "en:e14xx"
+          ],
+          [
+            "additives",
+            "en:e150d"
+          ],
+          [
+            "additives",
+            "en:e420"
+          ],
+          [
+            "additives",
+            "en:e428"
+          ],
+          [
+            "additives",
+            "en:e440"
+          ],
+          [
+            "additives",
+            "en:e901"
+          ],
+          [
+            "ingredients",
+            "en:colour"
+          ],
+          [
+            "ingredients",
+            "en:dextrose"
+          ],
+          [
+            "ingredients",
+            "en:gelling-agent"
+          ],
+          [
+            "ingredients",
+            "en:glucose"
+          ],
+          [
+            "ingredients",
+            "en:glucose-syrup"
+          ]
+        ]
+      },
+      "nova_groups_tags": [
+        "en:4-ultra-processed-food-and-drink-products"
+      ],
+      "nucleotides_prev_tags": [],
+      "nucleotides_tags": [],
+      "nutrient_levels": {
+        "fat": "low",
+        "salt": "low",
+        "saturated-fat": "low",
+        "sugars": "high"
+      },
+      "nutrient_levels_tags": [
+        "en:fat-in-low-quantity",
+        "en:saturated-fat-in-low-quantity",
+        "en:sugars-in-high-quantity",
+        "en:salt-in-low-quantity"
+      ],
+      "nutriments": {
+        "carbohydrates": 81,
+        "carbohydrates_100g": 81,
+        "carbohydrates_unit": "g",
+        "carbohydrates_value": 81,
+        "energy": 1448,
+        "energy-kcal": 346,
+        "energy-kcal_100g": 346,
+        "energy-kcal_unit": "kcal",
+        "energy-kcal_value": 346,
+        "energy-kcal_value_computed": 345.6,
+        "energy_100g": 1448,
+        "energy_unit": "kcal",
+        "energy_value": 346,
+        "fat": 0.8,
+        "fat_100g": 0.8,
+        "fat_unit": "g",
+        "fat_value": 0.8,
+        "fruits-vegetables-legumes-estimate-from-ingredients_100g": 0.0236355341397765,
+        "fruits-vegetables-legumes-estimate-from-ingredients_serving": 0.0236355341397765,
+        "fruits-vegetables-nuts-estimate-from-ingredients_100g": 0.0236355341397765,
+        "fruits-vegetables-nuts-estimate-from-ingredients_serving": 0.0236355341397765,
+        "nova-group": 4,
+        "nova-group_100g": 4,
+        "nova-group_serving": 4,
+        "nutrition-score-fr": 14,
+        "nutrition-score-fr_100g": 14,
+        "proteins": 3.6,
+        "proteins_100g": 3.6,
+        "proteins_unit": "g",
+        "proteins_value": 3.6,
+        "salt": 0.06,
+        "salt_100g": 0.06,
+        "salt_unit": "g",
+        "salt_value": 0.06,
+        "saturated-fat": 0.5,
+        "saturated-fat_100g": 0.5,
+        "saturated-fat_unit": "",
+        "saturated-fat_value": 0.5,
+        "sodium": 0.024,
+        "sodium_100g": 0.024,
+        "sodium_unit": "g",
+        "sodium_value": 0.024,
+        "sugars": 62,
+        "sugars_100g": 62,
+        "sugars_unit": "g",
+        "sugars_value": 62
+      },
+      "nutriscore": {
+        "2021": {
+          "category_available": 1,
+          "data": {
+            "energy": 1448,
+            "energy_points": 4,
+            "energy_value": 1448,
+            "fiber": 0,
+            "fiber_points": 0,
+            "fiber_value": 0,
+            "fruits_vegetables_nuts_colza_walnut_olive_oils": 0.0236355341397765,
+            "fruits_vegetables_nuts_colza_walnut_olive_oils_points": 0,
+            "fruits_vegetables_nuts_colza_walnut_olive_oils_value": 0,
+            "is_beverage": 0,
+            "is_cheese": 0,
+            "is_fat": 0,
+            "is_water": 0,
+            "negative_points": 14,
+            "positive_points": 0,
+            "proteins": 3.6,
+            "proteins_points": 2,
+            "proteins_value": 3.6,
+            "saturated_fat": 0.5,
+            "saturated_fat_points": 0,
+            "saturated_fat_value": 0.5,
+            "sodium": 24,
+            "sodium_points": 0,
+            "sodium_value": 24,
+            "sugars": 62,
+            "sugars_points": 10,
+            "sugars_value": 62
+          },
+          "grade": "d",
+          "nutrients_available": 1,
+          "nutriscore_applicable": 1,
+          "nutriscore_computed": 1,
+          "score": 14
+        },
+        "2023": {
+          "category_available": 1,
+          "data": {
+            "components": {
+              "negative": [
+                {
+                  "id": "energy",
+                  "points": 4,
+                  "points_max": 10,
+                  "unit": "kJ",
+                  "value": 1448
+                },
+                {
+                  "id": "sugars",
+                  "points": 15,
+                  "points_max": 15,
+                  "unit": "g",
+                  "value": 62
+                },
+                {
+                  "id": "saturated_fat",
+                  "points": 0,
+                  "points_max": 10,
+                  "unit": "g",
+                  "value": 0.5
+                },
+                {
+                  "id": "salt",
+                  "points": 0,
+                  "points_max": 20,
+                  "unit": "g",
+                  "value": 0.06
+                }
+              ],
+              "positive": [
+                {
+                  "id": "fiber",
+                  "points": 0,
+                  "points_max": 5,
+                  "unit": "g",
+                  "value": 0
+                },
+                {
+                  "id": "fruits_vegetables_legumes",
+                  "points": 0,
+                  "points_max": 5,
+                  "unit": "%",
+                  "value": 0
+                }
+              ]
+            },
+            "count_proteins": 0,
+            "count_proteins_reason": "negative_points_greater_than_or_equal_to_11",
+            "is_beverage": 0,
+            "is_cheese": 0,
+            "is_fat_oil_nuts_seeds": 0,
+            "is_red_meat_product": 0,
+            "is_water": 0,
+            "negative_points": 19,
+            "negative_points_max": 55,
+            "positive_nutrients": [
+              "fiber",
+              "fruits_vegetables_legumes"
+            ],
+            "positive_points": 0,
+            "positive_points_max": 10
+          },
+          "grade": "e",
+          "nutrients_available": 1,
+          "nutriscore_applicable": 1,
+          "nutriscore_computed": 1,
+          "score": 19
+        }
+      },
+      "nutriscore_2021_tags": [
+        "d"
+      ],
+      "nutriscore_2023_tags": [
+        "e"
+      ],
+      "nutriscore_data": {
+        "energy": 1448,
+        "energy_points": 4,
+        "energy_value": 1448,
+        "fiber": 0,
+        "fiber_points": 0,
+        "fiber_value": 0,
+        "fruits_vegetables_nuts_colza_walnut_olive_oils": 0.0236355341397765,
+        "fruits_vegetables_nuts_colza_walnut_olive_oils_points": 0,
+        "fruits_vegetables_nuts_colza_walnut_olive_oils_value": 0,
+        "grade": "d",
+        "is_beverage": 0,
+        "is_cheese": 0,
+        "is_fat": 0,
+        "is_water": 0,
+        "negative_points": 14,
+        "positive_points": 0,
+        "proteins": 3.6,
+        "proteins_points": 2,
+        "proteins_value": 3.6,
+        "saturated_fat": 0.5,
+        "saturated_fat_points": 0,
+        "saturated_fat_value": 0.5,
+        "score": 14,
+        "sodium": 24,
+        "sodium_points": 0,
+        "sodium_value": 24,
+        "sugars": 62,
+        "sugars_points": 10,
+        "sugars_value": 62
+      },
+      "nutriscore_grade": "d",
+      "nutriscore_score": 14,
+      "nutriscore_score_opposite": -14,
+      "nutriscore_tags": [
+        "d"
+      ],
+      "nutriscore_version": "2021",
+      "nutrition_data_per": "100g",
+      "nutrition_data_prepared_per": "100g",
+      "nutrition_grade_fr": "d",
+      "nutrition_grades": "d",
+      "nutrition_grades_tags": [
+        "d"
+      ],
+      "nutrition_score_beverage": 0,
+      "nutrition_score_debug": "",
+      "nutrition_score_warning_fruits_vegetables_legumes_estimate_from_ingredients": 1,
+      "nutrition_score_warning_fruits_vegetables_legumes_estimate_from_ingredients_value": 0.0236355341397765,
+      "nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients": 1,
+      "nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value": 0.0236355341397765,
+      "nutrition_score_warning_no_fiber": 1,
+      "other_nutritional_substances_tags": [],
+      "packaging": "Plasique",
+      "packaging_hierarchy": [
+        "fr:Plasique"
+      ],
+      "packaging_lc": "fr",
+      "packaging_materials_tags": [],
+      "packaging_old": "plasique",
+      "packaging_recycling_tags": [],
+      "packaging_shapes_tags": [],
+      "packaging_tags": [
+        "fr:plasique"
+      ],
+      "packagings": [],
+      "packagings_materials": {
+  
+      },
+      "photographers_tags": [
+        "kiliweb",
+        "openfoodfacts-contributors"
+      ],
+      "pnns_groups_1": "Sugary snacks",
+      "pnns_groups_1_tags": [
+        "sugary-snacks",
+        "known"
+      ],
+      "pnns_groups_2": "Sweets",
+      "pnns_groups_2_tags": [
+        "sweets",
+        "known"
+      ],
+      "popularity_key": 20900000001,
+      "popularity_tags": [
+        "bottom-25-percent-scans-2019",
+        "top-80-percent-scans-2019",
+        "top-85-percent-scans-2019",
+        "top-90-percent-scans-2019",
+        "top-country-fr-scans-2019",
+        "top-10000-nl-scans-2019",
+        "top-50000-nl-scans-2019",
+        "top-100000-nl-scans-2019",
+        "top-50000-be-scans-2019",
+        "top-100000-be-scans-2019",
+        "top-100000-scans-2021",
+        "at-least-5-scans-2021",
+        "top-75-percent-scans-2021",
+        "top-80-percent-scans-2021",
+        "top-85-percent-scans-2021",
+        "top-90-percent-scans-2021",
+        "top-10000-be-scans-2021",
+        "top-50000-be-scans-2021",
+        "top-100000-be-scans-2021",
+        "top-country-be-scans-2021",
+        "top-5000-fi-scans-2021",
+        "top-10000-fi-scans-2021",
+        "top-50000-fi-scans-2021",
+        "top-100000-fi-scans-2021",
+        "top-10000-nl-scans-2021",
+        "top-50000-nl-scans-2021",
+        "top-100000-nl-scans-2021",
+        "bottom-25-percent-scans-2022",
+        "bottom-20-percent-scans-2022",
+        "bottom-15-percent-scans-2022",
+        "top-90-percent-scans-2022",
+        "top-50000-es-scans-2022",
+        "top-100000-es-scans-2022",
+        "top-country-es-scans-2022",
+        "top-75-percent-scans-2023",
+        "top-80-percent-scans-2023",
+        "top-85-percent-scans-2023",
+        "top-90-percent-scans-2023",
+        "top-100000-fr-scans-2023",
+        "top-country-fr-scans-2023"
+      ],
+      "product_name": "mini candy sushi",
+      "product_name_ar": "Look O Look Mini Cand. sushi100",
+      "product_name_fr": "mini candy sushi",
+      "product_quantity": "100",
+      "purchase_places": "Belgique",
+      "purchase_places_tags": [
+        "belgique"
+      ],
+      "quantity": "100 grammes",
+      "removed_countries_tags": [],
+      "rev": 14,
+      "scans_n": 1,
+      "selected_images": {
+        "front": {
+          "display": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.400.jpg"
+          },
+          "small": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.200.jpg"
+          },
+          "thumb": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/front_en.11.100.jpg"
+          }
+        },
+        "ingredients": {
+          "display": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_en.4.400.jpg",
+            "fr": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_fr.5.400.jpg"
+          },
+          "small": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_en.4.200.jpg",
+            "fr": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_fr.5.200.jpg"
+          },
+          "thumb": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_en.4.100.jpg",
+            "fr": "https://images.openfoodfacts.org/images/products/871/360/028/6072/ingredients_fr.5.100.jpg"
+          }
+        },
+        "nutrition": {
+          "display": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_en.7.400.jpg",
+            "fr": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_fr.8.400.jpg"
+          },
+          "small": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_en.7.200.jpg",
+            "fr": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_fr.8.200.jpg"
+          },
+          "thumb": {
+            "en": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_en.7.100.jpg",
+            "fr": "https://images.openfoodfacts.org/images/products/871/360/028/6072/nutrition_fr.8.100.jpg"
+          }
+        }
+      },
+      "sortkey": 1588350970,
+      "states": "en:to-be-completed, en:nutrition-facts-completed, en:ingredients-completed, en:expiration-date-to-be-completed, en:packaging-code-to-be-completed, en:characteristics-to-be-completed, en:origins-to-be-completed, en:categories-completed, en:brands-completed, en:packaging-completed, en:quantity-completed, en:product-name-completed, en:photos-to-be-validated, en:packaging-photo-to-be-selected, en:nutrition-photo-selected, en:ingredients-photo-selected, en:front-photo-to-be-selected, en:photos-uploaded",
+      "states_hierarchy": [
+        "en:to-be-completed",
+        "en:nutrition-facts-completed",
+        "en:ingredients-completed",
+        "en:expiration-date-to-be-completed",
+        "en:packaging-code-to-be-completed",
+        "en:characteristics-to-be-completed",
+        "en:origins-to-be-completed",
+        "en:categories-completed",
+        "en:brands-completed",
+        "en:packaging-completed",
+        "en:quantity-completed",
+        "en:product-name-completed",
+        "en:photos-to-be-validated",
+        "en:packaging-photo-to-be-selected",
+        "en:nutrition-photo-selected",
+        "en:ingredients-photo-selected",
+        "en:front-photo-to-be-selected",
+        "en:photos-uploaded"
+      ],
+      "states_tags": [
+        "en:to-be-completed",
+        "en:nutrition-facts-completed",
+        "en:ingredients-completed",
+        "en:expiration-date-to-be-completed",
+        "en:packaging-code-to-be-completed",
+        "en:characteristics-to-be-completed",
+        "en:origins-to-be-completed",
+        "en:categories-completed",
+        "en:brands-completed",
+        "en:packaging-completed",
+        "en:quantity-completed",
+        "en:product-name-completed",
+        "en:photos-to-be-validated",
+        "en:packaging-photo-to-be-selected",
+        "en:nutrition-photo-selected",
+        "en:ingredients-photo-selected",
+        "en:front-photo-to-be-selected",
+        "en:photos-uploaded"
+      ],
+      "stores": "Magasins U",
+      "stores_debug_tags": [],
+      "stores_tags": [
+        "magasins-u"
+      ],
+      "teams": "chocolatine,la-robe-est-bleue",
+      "teams_tags": [
+        "chocolatine",
+        "la-robe-est-bleue"
+      ],
+      "traces": "",
+      "traces_from_ingredients": "",
+      "traces_from_user": "(fr) ",
+      "traces_hierarchy": [],
+      "traces_tags": [],
+      "unique_scans_n": 1,
+      "unknown_ingredients_n": 21,
+      "unknown_nutrients_tags": [],
+      "update_key": "20240209",
+      "vitamins_prev_tags": [],
+      "vitamins_tags": [],
+      "with_sweeteners": 1
+    },
+    "status": 1,
+    "status_verbose": "product found"
+  }

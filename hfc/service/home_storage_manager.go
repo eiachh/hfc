@@ -34,12 +34,12 @@ func NewHomeStorageManager(db *storage.MongoStorage) *HomeStorageManager {
 
 func (manager *HomeStorageManager) InsertProd(amnt int, prod *types.Product) {
 	toInsert := types.StorageItem{
-		UUID:     uuid.NewString(),
 		Acquired: time.Now(),
 		Expires:  time.Now().Add(time.Duration(prod.ExpireDays) * 24 * time.Hour),
 	}
 
 	for i := 0; i < amnt; i++ {
+		toInsert.UUID = uuid.NewString()
 		manager.homeStorage.HomeStorageItems[prod.Code] = append(manager.homeStorage.HomeStorageItems[prod.Code], toInsert)
 	}
 	manager.saveHsToDb()

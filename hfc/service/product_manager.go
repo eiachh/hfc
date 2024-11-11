@@ -11,7 +11,7 @@ import (
 type ProductManger struct {
 	mongodb             *storage.MongoStorage
 	aiParser            *AiParser
-	products            []types.Product
+	products            *map[int64]*types.Product
 	categoryHierarchies []*types.CategoryHierarchy
 }
 
@@ -30,22 +30,34 @@ func (prodMan *ProductManger) init() {
 }
 
 func (prodMan *ProductManger) fillProducts() {
-	prodMan.products = *prodMan.mongodb.GetAllProduct()
+	products := make(map[int64]*types.Product)
+	allProductAsSlice := *prodMan.mongodb.GetAllProduct()
+	for _, prod := range allProductAsSlice {
+		products[int64(prod.Code)] = &prod
+	}
+
+	prodMan.products = &products
 }
 
 func (prodMan *ProductManger) fillCategoryHierarchies() {
-	for _, product := range prodMan.products {
-		prodMan.fillCategoryHierarchiesFromProd(&product)
+	prodMan.categoryHierarchies = prodMan.categoryHierarchies[:0]
+	for _, product := range *prodMan.products {
+		prodMan.fillCategoryHierarchiesFromProd(product)
 	}
 }
 
 func (prodMan *ProductManger) fillCategoryHierarchiesFromProd(product *types.Product) {
-	var prevCatHItem *types.CategoryHierarchy
+	var (
+		prevCatHItem      *types.CategoryHierarchy
+		changedCategories []*types.CategoryHierarchy
+	)
+
 	for _, categoryName := range product.Categories {
 		cat := prodMan.getCategoryByName(categoryName)
 		if cat != nil {
 			// Reroute of new hierarchy defined
 			if cat.Parent != nil && cat.Parent.Name != prevCatHItem.Name {
+				changedCategories = append(changedCategories, cat)
 				cat.Parent = prevCatHItem
 			}
 			prevCatHItem = cat
@@ -54,6 +66,16 @@ func (prodMan *ProductManger) fillCategoryHierarchiesFromProd(product *types.Pro
 			prevCatHItem = newItem
 			prodMan.categoryHierarchies = append(prodMan.categoryHierarchies, newItem)
 		}
+	}
+
+	// Every cat path should be contained once only, change can only happen if the user forcefully changed an existing category list,
+	// So we have to update all the products that had the same cat hierarchy
+	for _, cat := range changedCategories {
+		prodMan.SwitchCategoryInAffectedProducts(*cat)
+	}
+
+	if len(changedCategories) > 0 {
+		prodMan.fillCategoryHierarchies()
 	}
 }
 
@@ -64,6 +86,26 @@ func (prodMan *ProductManger) getCategoryByName(nameOfHierarchyItem string) *typ
 		}
 	}
 	return nil
+}
+
+func (prodMan *ProductManger) SwitchCategoryInAffectedProducts(changedCategory types.CategoryHierarchy) {
+	for _, prod := range *prodMan.products {
+		needsChange := false
+		for i := 1; i < len(prod.Categories); i++ { // Start from index 1 to avoid out-of-bounds access
+			if prod.Categories[i] == changedCategory.Name {
+				needsChange = true
+				break
+			}
+		}
+		if needsChange {
+			copy(prod.Categories[:len(changedCategory.AsSlice())], changedCategory.AsSlice())
+			if prod.Reviewed {
+				prodMan.NewReviewed(prod)
+			} else {
+				prodMan.NewUnReviewed(prod)
+			}
+		}
+	}
 }
 
 // TODO cat hierarchy
@@ -78,10 +120,16 @@ func (prodMan *ProductManger) GetOrRegisterProduct(barC int64) (*types.Product, 
 		return prod, false, nil
 	} else if offJson != nil {
 		prod, err = prodMan.aiParser.ConvertOffToLocCache(&offJson)
+		if err != nil {
+			return nil, false, errors.New("off convert failed")
+		}
 		prod.Code = barC
 		prodMan.NewUnReviewed(prod)
 	} else {
 		prod, err = prodMan.aiParser.DoWebscrape(barC)
+		if err != nil {
+			return nil, false, errors.New("webscrape failed")
+		}
 		prod.Code = barC
 		prodMan.NewUnReviewed(prod)
 	}
@@ -103,13 +151,17 @@ func (prodMan *ProductManger) GetAllUnreviewed() (*[]types.Product, error) {
 
 func (prodMan *ProductManger) NewReviewed(prod *types.Product) error {
 	prod.Reviewed = true
+	(*prodMan.products)[prod.Code] = prod
 	prodMan.fillCategoryHierarchiesFromProd(prod)
+
 	return prodMan.mongodb.NewProduct(prod)
 }
 
 func (prodMan *ProductManger) NewUnReviewed(prod *types.Product) error {
 	prod.Reviewed = false
+	(*prodMan.products)[prod.Code] = prod
 	prodMan.fillCategoryHierarchiesFromProd(prod)
+
 	return prodMan.mongodb.NewProduct(prod)
 }
 

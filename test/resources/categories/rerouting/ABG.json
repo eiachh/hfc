@@ -1,0 +1,12 @@
+{ "code": 2,
+    "brands": "Test",
+    "product_name": "Test",
+   "display_name": "Test",
+    "expire_avg": 369,
+    "categories_hierarchy": [
+      "A",
+      "B",
+      "G"
+    ],
+    "measurement_unit": "gramm"
+}
