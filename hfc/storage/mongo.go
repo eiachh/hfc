@@ -7,8 +7,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/labstack/gommon/log"
-
+	"github.com/eiachh/hfc/logger"
 	"github.com/eiachh/hfc/types"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -35,7 +34,7 @@ type MongoStorage struct {
 }
 
 func NewMongoStorage(uname string, pwd string, host string, port string, offDb string, cacheDb string, authDB string) *MongoStorage {
-	log.Infof("Mongo init with Username: %s, Password: %s, Host: %s, Port: %s, OffDB: %s, CacheDB: %s, AuthDB: %s",
+	logger.Log().Infof("Mongo init with Username: %s, Password: %s, Host: %s, Port: %s, OffDB: %s, CacheDB: %s, AuthDB: %s",
 		uname, pwd, host, port, offDb, cacheDb, authDB)
 
 	// Create a MongoDB URI
@@ -45,7 +44,7 @@ func NewMongoStorage(uname string, pwd string, host string, port string, offDb s
 	// Connect to MongoDB
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(connString))
 	if err != nil {
-		log.Fatal(err)
+		logger.Log().Fatal(err)
 	}
 
 	return &MongoStorage{
@@ -74,7 +73,8 @@ func (s *MongoStorage) NewProduct(prod *types.Product) error {
 		return err
 	}
 
-	// TODO HS can save correctly this can only save str?
+	prodAsStr, _ := json.Marshal(prod)
+	logger.Log().Debugf("Inserting to db, %s", prodAsStr)
 	_, err = cacheDBCollection.InsertOne(s.Ctx, prod)
 	if err != nil {
 		return err
@@ -94,6 +94,7 @@ func (s *MongoStorage) NewUnreviewedImg(barCode int64, imgAsBase64 string) error
 		return errors.New("img already exists for this barcode")
 	}
 
+	logger.Log().Debugf("Inserting to db, barcode: %d, imageAsBase64: %s", barCode, imgAsBase64)
 	_, err = unrevImgColl.InsertOne(s.Ctx, bson.M{"code": barCode, "imgAsBase64": imgAsBase64})
 	if err != nil {
 		return err
@@ -102,6 +103,7 @@ func (s *MongoStorage) NewUnreviewedImg(barCode int64, imgAsBase64 string) error
 }
 
 func (s *MongoStorage) GetUnreviewedImg(barCode int64) (string, error) {
+	logger.Log().Debug("Getting unreviewed image")
 	unrevImgColl := s.Client.Database(s.CacheDatabase).Collection(s.UnrevImgCollName)
 	filter := bson.M{"code": barCode}
 	res, err := s.FindInCollection(filter, unrevImgColl)
@@ -123,6 +125,7 @@ func (s *MongoStorage) GetUnreviewedImg(barCode int64) (string, error) {
 }
 
 func (s *MongoStorage) SaveHomeStorage(hs *types.HomeStorage) error {
+	logger.Log().Debug("Saving hs to DB")
 	hsDbCollection := s.Client.Database(s.CacheDatabase).Collection(s.HsCollName)
 	filter := bson.M{}
 	_, err := hsDbCollection.ReplaceOne(s.Ctx, filter, hs, options.Replace().SetUpsert(true))
@@ -133,11 +136,12 @@ func (s *MongoStorage) SaveHomeStorage(hs *types.HomeStorage) error {
 }
 
 func (s *MongoStorage) GetAllProduct() *[]types.Product {
+	logger.Log().Debug("Getting all products")
 	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
 	cacheDBResults, findErr := s.FindInCollection(bson.M{}, cacheDBCollection)
 
 	if findErr != nil {
-		log.Error(findErr)
+		logger.Log().Error(findErr)
 		return nil
 	}
 
@@ -165,29 +169,33 @@ func (s *MongoStorage) GetByBarCode(code int64) (*types.Product, []byte) {
 
 	cacheDBResults, findErrCache := s.FindInCollection(filterCache, cacheDBCollection)
 	if findErrCache != nil {
-		log.Error(findErrCache)
+		logger.Log().Error(findErrCache)
 		return nil, nil
 	}
 	if len(*cacheDBResults) == 1 {
 		var product types.Product
 		jsonData, _ := json.Marshal((*cacheDBResults)[0])
 		json.Unmarshal([]byte(jsonData), &product)
+		logger.Log().Debugf("Returning prod: %s", jsonData)
 		return &product, nil
 	}
 
 	offDBResults, findErrOff := s.FindInCollection(filterOff, offDBCollection)
 	if findErrOff != nil {
-		log.Error(findErrOff)
+		logger.Log().Error(findErrOff)
 		return nil, nil
 	}
 	if len(*offDBResults) == 1 {
 		jsonData, _ := json.Marshal((*offDBResults)[0])
+		logger.Log().Debugf("Returning jsondata of OFF, data: %s", jsonData)
 		return nil, jsonData
 	}
+	logger.Log().Debug("could not find prod by barcode")
 	return nil, nil
 }
 
 func (s *MongoStorage) LoadHomeStorage() (*types.HomeStorage, error) {
+	logger.Log().Debug("Loading HS")
 	var homeStorage types.HomeStorage
 
 	hsDbCollection := s.Client.Database(s.CacheDatabase).Collection(s.HsCollName)
@@ -196,6 +204,7 @@ func (s *MongoStorage) LoadHomeStorage() (*types.HomeStorage, error) {
 }
 
 func (s *MongoStorage) GetUnreviewedProducts() (*[]types.Product, error) {
+	logger.Log().Debug("Getting unreviewed products")
 	var unreviewed []types.Product
 	filter := bson.M{"reviewed": false}
 	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
@@ -252,6 +261,7 @@ func (s *MongoStorage) FindInCollection(filter primitive.M, coll *mongo.Collecti
 
 // TODO This needs to be an ordered list not just random strings
 func (s *MongoStorage) GetCatListDistinct() (*[]byte, error) {
+	logger.Log().Debug("Getting category list")
 	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)
 
 	distCategories, err := cacheDBCollection.Distinct(s.Ctx, "categories_hierarchy", bson.M{})

@@ -2,12 +2,14 @@
 openApi:
   enabled: false
 
+loglevel: INFO
+
 image:
   repository: eiachh/home-foods-core
   # This sets the pull policy for images.
   pullPolicy: Never
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "0.1.0"
 
 # This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []

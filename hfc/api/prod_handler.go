@@ -1,11 +1,14 @@
 package api
 
 import (
+	"encoding/json"
 	"net/http"
 	"strconv"
 
+	"github.com/eiachh/hfc/logger"
 	"github.com/eiachh/hfc/service"
 	"github.com/eiachh/hfc/types"
+
 	"github.com/labstack/echo/v4"
 )
 
@@ -21,6 +24,7 @@ func NewProdHandler(pMan *service.ProductManger) *ProdHandler {
 
 // Returns a product based on the given barcode from loc-cache
 func (pHandler *ProdHandler) GetProduct(c echo.Context) error {
+	logger.Log().Info("GetProduct called")
 	id := c.Param("code")
 	barC, convErr := strconv.ParseInt(id, 10, 64)
 	if convErr != nil {
@@ -35,6 +39,7 @@ func (pHandler *ProdHandler) GetProduct(c echo.Context) error {
 }
 
 func (pHandler *ProdHandler) GetUnverified(c echo.Context) error {
+	logger.Log().Info("GetUnverified called")
 	prods, err := pHandler.prodManager.GetAllUnreviewed()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
@@ -46,6 +51,7 @@ func (pHandler *ProdHandler) GetUnverified(c echo.Context) error {
 }
 
 func (pHandler *ProdHandler) SetUnreviewedImg(c echo.Context) error {
+	logger.Log().Info("GetUnverified called")
 	barC, convErr := strconv.ParseInt(c.Param("code"), 10, 64)
 	if convErr != nil {
 		return c.JSON(http.StatusBadRequest, convErr)
@@ -59,6 +65,8 @@ func (pHandler *ProdHandler) SetUnreviewedImg(c echo.Context) error {
 		})
 	}
 
+	reqBodyJson, _ := json.Marshal(requestBody)
+	logger.Log().Debugf("Request with barC: %d, requestBody: %s", barC, reqBodyJson)
 	if err := pHandler.prodManager.SetUnreviewedImg(barC, requestBody.ImgAsBase64); err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -67,6 +75,7 @@ func (pHandler *ProdHandler) SetUnreviewedImg(c echo.Context) error {
 }
 
 func (pHandler *ProdHandler) GetUnreviewedImg(c echo.Context) error {
+	logger.Log().Info("GetUnreviewedImg called")
 	barC, convErr := strconv.ParseInt(c.Param("code"), 10, 64)
 	if convErr != nil {
 		return c.JSON(http.StatusBadRequest, convErr)
@@ -82,25 +91,22 @@ func (pHandler *ProdHandler) GetUnreviewedImg(c echo.Context) error {
 
 // Adds a new product to the loc-cache db
 func (pHandler *ProdHandler) NewProd(c echo.Context) error {
-
+	logger.Log().Info("NewProd called")
 	prod := new(types.Product)
 	if err := c.Bind(prod); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
+
+	reqBodyJson, _ := json.Marshal(prod)
+	logger.Log().Debugf("Request with requestBody: %s", reqBodyJson)
 	if err := pHandler.prodManager.NewReviewed(prod); err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 	return c.JSON(http.StatusOK, prod)
 }
 
-func (pHandler *ProdHandler) DeleteProduct(c echo.Context) error {
-	// User ID from path `users/:id`
-	id := c.Param("code")
-	print(id)
-	return c.String(http.StatusOK, string("asd"))
-}
-
 func (pHandler *ProdHandler) GetCatList(c echo.Context) error {
+	logger.Log().Info("GetCatList called")
 	catList, err := pHandler.prodManager.GetCatListDistinct()
 	if err != nil {
 		return err

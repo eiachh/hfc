@@ -47,8 +47,15 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: openai
+                  key: KEY
             - name: SERVER_PORT
               value: "30021"
+            - name: LOGLEVEL
+              value: {{ .Values.loglevel | quote }}
             - name: MONGODB_USER
               value: {{ .Values.env.mongo.user | quote }}
             - name: MONGODB_PWD

@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/eiachh/hfc/api"
+	"github.com/eiachh/hfc/logger"
 	"github.com/eiachh/hfc/service"
 	"github.com/eiachh/hfc/storage"
 
@@ -79,6 +80,8 @@ func Ready(c echo.Context) error {
 }
 
 func Init() {
+	logger.Init()
+
 	use_openai := flag.String("use_openai", "false", "IF enabled it uses the actual structure like openapi.")
 	localDb := flag.String("localdb", "true", "IF enabled it uses a loal db instead of reading everything from env vars. Used when not on helm")
 	flag.Parse()

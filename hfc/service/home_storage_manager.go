@@ -4,8 +4,8 @@ import (
 	"errors"
 	"time"
 
+	"github.com/eiachh/hfc/logger"
 	"github.com/google/uuid"
-	"github.com/labstack/gommon/log"
 
 	"github.com/eiachh/hfc/storage"
 	"github.com/eiachh/hfc/types"
@@ -99,14 +99,14 @@ func (manager *HomeStorageManager) GetAll() *types.HomeStorage {
 func (manager *HomeStorageManager) saveHsToDb() {
 	err := manager.mongodb.SaveHomeStorage(manager.homeStorage)
 	if err != nil {
-		log.Error(err)
+		logger.Log().Error(err)
 	}
 }
 
 func getHsFromDb(db *storage.MongoStorage) (*types.HomeStorage, error) {
 	hs, err := db.LoadHomeStorage()
 	if err != nil {
-		log.Error(err)
+		logger.Log().Error(err)
 		return nil, err
 	}
 	return hs, nil

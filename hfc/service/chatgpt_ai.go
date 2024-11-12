@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/eiachh/hfc/logger"
 	"github.com/eiachh/hfc/types"
-	"github.com/labstack/gommon/log"
 )
 
 type aiReqBody struct {
@@ -203,10 +203,7 @@ func (ai *ChatGptAiCaller) ParseOff(trimmedOffByte []byte) (*types.Product, erro
 	aibody.Messages[1].Content = string(trimmedOffByte)
 	aibodyJson, _ := json.MarshalIndent(aibody, "", "  ")
 
-	// Perform the request
-	// Read the response body
-	//os.WriteFile("chatgptresponse.txt", body, 0644)
-	chatComp, err := ai.CallGpt(aibodyJson)
+	chatComp, err := ai.callGpt(aibodyJson)
 	if err != nil {
 		return nil, err
 	}
@@ -237,16 +234,16 @@ func (ai *ChatGptAiCaller) WebScrapeParse(barcode int64) (*types.Product, error)
 	aibody.Messages = append(aibody.Messages, sysMsg)
 
 	aiBodyJson, _ := json.MarshalIndent(aibody, "", "  ")
-	respChatComp, err := ai.CallGpt(aiBodyJson)
-	log.Debug(respChatComp)
+	respChatComp, err := ai.callGpt(aiBodyJson)
+	logger.Log().Debug(respChatComp)
 	if err != nil {
 		return nil, err
 	}
-	log.Debug(respChatComp)
+	logger.Log().Debug(respChatComp)
 	return ai.parseAiResp(barcode, respChatComp, &aibody, 1)
 }
 
-func (ai *ChatGptAiCaller) CallGpt(reqBodyJson []byte) (*ChatCompletion, error) {
+func (ai *ChatGptAiCaller) callGpt(reqBodyJson []byte) (*ChatCompletion, error) {
 	client := &http.Client{}
 
 	req, err := http.NewRequest("POST", ai.url, bytes.NewBuffer(reqBodyJson))
@@ -258,6 +255,7 @@ func (ai *ChatGptAiCaller) CallGpt(reqBodyJson []byte) (*ChatCompletion, error) 
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+ai.api_key)
 
+	logger.Log().Debugf("Calling openapi with request: %s", reqBodyJson)
 	resp, err := client.Do(req)
 	if err != nil {
 		return &ChatCompletion{}, err
@@ -269,10 +267,8 @@ func (ai *ChatGptAiCaller) CallGpt(reqBodyJson []byte) (*ChatCompletion, error) 
 		return &ChatCompletion{}, err
 	}
 
-	log.Info((string(body)))
+	logger.Log().Debugf("Openapi response: %s", body)
 	var chatComp ChatCompletion
-	os.WriteFile("chatgptREQUEST.txt", reqBodyJson, 0644)
-	os.WriteFile("chatgptRESPONSE3.txt", body, 0644)
 	json.Unmarshal(body, &chatComp)
 	return &chatComp, nil
 }
@@ -315,11 +311,11 @@ func (ai *ChatGptAiCaller) webScrapeWithCtx(barcode int64, chatComp *ChatComplet
 	aibody.Messages = append(aibody.Messages, sysMsg)
 
 	aiBodyJson, _ := json.MarshalIndent(aibody, "", "  ")
-	respChatComp, err := ai.CallGpt(aiBodyJson)
+	respChatComp, err := ai.callGpt(aiBodyJson)
 	if err != nil {
 		return nil, err
 	}
-	log.Debug(respChatComp)
+	logger.Log().Debug(respChatComp)
 	return ai.parseAiResp(barcode, respChatComp, &aibody, callCount+1)
 }
 
@@ -332,17 +328,17 @@ func (ai *ChatGptAiCaller) parseAiResp(barC int64, chatComp *ChatCompletion, aib
 
 	// TODO Handle logging if by any chance multiple choice or tool calls happened.
 	if len(chatComp.Choices) > 1 {
-		log.Fatal("Multiple choices were given by the AI")
+		logger.Log().Fatal("Multiple choices were given by the AI")
 	}
 	if len(chatComp.Choices[0].Message.ToolCalls) > 1 {
-		log.Fatal("Multiple toolCalls were given by the AI")
+		logger.Log().Fatal("Multiple toolCalls were given by the AI")
 	}
 
 	if chatComp.Choices[0].Message.ToolCalls[0].Function.Name == "request_more_info" {
 		return ai.webScrapeWithCtx(barC, chatComp, aibody, callCount)
 	} else {
 		if responseArgErr := json.Unmarshal([]byte(chatComp.Choices[0].Message.ToolCalls[0].Function.Arguments), &prod); responseArgErr != nil {
-			log.Error(responseArgErr)
+			logger.Log().Error(responseArgErr)
 			return nil, responseArgErr
 		}
 	}

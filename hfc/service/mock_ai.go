@@ -4,12 +4,14 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/eiachh/hfc/logger"
 	"github.com/eiachh/hfc/types"
 )
 
 type MockAiCaller struct{}
 
 func (mockAi *MockAiCaller) ParseOff(trimmedOff []byte) (*types.Product, error) {
+	logger.Log().Warn("You used the mock ai FOREHEAD")
 	if strings.Contains(string(trimmedOff), "4014500513010") {
 		prod := &types.Product{
 			Brands:          "Zott",
@@ -25,9 +27,11 @@ func (mockAi *MockAiCaller) ParseOff(trimmedOff []byte) (*types.Product, error) 
 }
 
 func (ai *MockAiCaller) WebScrapeParse(barcode int64) (*types.Product, error) {
+	logger.Log().Warn("You used the mock ai FOREHEAD")
 	return nil, nil
 }
 
 func NewMockAiCaller() *MockAiCaller {
+	logger.Log().Warn("You used the mock ai FOREHEAD")
 	return &MockAiCaller{}
 }
