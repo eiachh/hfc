@@ -10,7 +10,6 @@ type StorageItem struct {
 	Expires  time.Time `json:"expires" bson:"expires"`
 }
 
-// TODO separate by user
 type HomeStorage struct {
 	HomeStorageItems map[int64][]StorageItem `json:"home_storage_items" bson:"home_storage_items"`
 }

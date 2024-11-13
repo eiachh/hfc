@@ -95,7 +95,6 @@ func (manager *HomeStorageManager) GetAll() *types.HomeStorage {
 	return manager.homeStorage
 }
 
-// TODO do not duplicate prod data with save, save the barC only and fetch prod data separately
 func (manager *HomeStorageManager) saveHsToDb() {
 	err := manager.mongodb.SaveHomeStorage(manager.homeStorage)
 	if err != nil {

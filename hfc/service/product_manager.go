@@ -108,7 +108,6 @@ func (prodMan *ProductManger) SwitchCategoryInAffectedProducts(changedCategory t
 	}
 }
 
-// TODO cat hierarchy
 func (prodMan *ProductManger) GetOrRegisterProduct(barC int64) (*types.Product, bool, error) {
 	var prod *types.Product
 	var err error

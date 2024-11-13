@@ -259,7 +259,6 @@ func (s *MongoStorage) FindInCollection(filter primitive.M, coll *mongo.Collecti
 	return &cacheDBResults, nil
 }
 
-// TODO This needs to be an ordered list not just random strings
 func (s *MongoStorage) GetCatListDistinct() (*[]byte, error) {
 	logger.Log().Debug("Getting category list")
 	cacheDBCollection := s.Client.Database(s.CacheDatabase).Collection(s.ProdCollName)

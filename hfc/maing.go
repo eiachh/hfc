@@ -33,11 +33,6 @@ var (
 	port string
 )
 
-// TODO Testing
-// TODO MOCKS
-// TODO Logging
-// TODO Caching vars memory, USE PROD LIST CACHE INSTEAD OF DB, just sync
-// TODO Separate logic from mongo storage
 func main() {
 	ready = false
 	healthy = false
