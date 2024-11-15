@@ -32,6 +32,9 @@ func (ai *MockAiCaller) WebScrapeParse(barcode int64) (*types.Product, error) {
 }
 
 func NewMockAiCaller() *MockAiCaller {
-	logger.Log().Warn("You used the mock ai FOREHEAD")
+	for i := 1; i <= 25; i++ {
+		logger.Log().Warn("You used the mock ai FOREHEAD")
+	}
+
 	return &MockAiCaller{}
 }
