@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/eiachh/hfc/logger"
 	"github.com/eiachh/hfc/types"
@@ -212,34 +213,37 @@ func (ai *ChatGptAiCaller) ParseOff(trimmedOffByte []byte) (*types.Product, erro
 }
 
 func (ai *ChatGptAiCaller) WebScrapeParse(barcode int64) (*types.Product, error) {
+	allowedWebscrapeLimit := ai.callCountLimit - 1
+
+	logger.Log().Debug("Running webscraping")
 	aibody := NewAiReqBody()
+	aibody.Messages = append(aibody.Messages[:1], aibody.Messages[2:]...)
+
 	forceModel := "gpt-4o-mini"
 	aibody.Model = forceModel
 
-	rawHtml, scrapeError := ScrapeDataOf(barcode, 1)
-
-	if scrapeError != nil {
-		return nil, scrapeError
-	}
+	scrapedHtmlText := ScrapeDataOf(barcode, 1)
+	logger.Log().Debugf("Got back scraped html: %s", scrapedHtmlText)
 
 	firstWebscrapeMsg := aiMessage{
 		Role:    "user",
-		Content: rawHtml,
+		Content: scrapedHtmlText,
 	}
 	sysMsg := aiMessage{
 		Role:    "system",
-		Content: "You got some scraped data, try to logically fill out the final_response. Mock, empty, placeholder data is still not allowed. Try to figure out the fields logically. If you do believe the scraped data is not about a the food product, you can still use request_more_info, or if you think you still need more info. the request_more_info function should be used only if you are certain you need more info.",
+		Content: ("Remember you are filling out a product info of a food or drink product, ignore the text unrelated to any food or drink item. You got some scraped data, try to logically fill out the final_response. Mock, empty, placeholder data is still not allowed. Try to figure out the fields logically. If you do believe the scraped data is not about a the food product, you can still use request_more_info, or if you think you still need more info. If you can confidently answer it is prefered but you can still use the request_more_info function " + strconv.Itoa(allowedWebscrapeLimit) + " more times."),
 	}
 	aibody.Messages = append(aibody.Messages, firstWebscrapeMsg)
 	aibody.Messages = append(aibody.Messages, sysMsg)
 
 	aiBodyJson, _ := json.MarshalIndent(aibody, "", "  ")
+	logger.Log().Debugf("Sent aibody json: %s", aiBodyJson)
 	respChatComp, err := ai.callGpt(aiBodyJson)
-	logger.Log().Debug(respChatComp)
+	logger.Log().Debugf("Got response: %s", respChatComp)
+
 	if err != nil {
 		return nil, err
 	}
-	logger.Log().Debug(respChatComp)
 	return ai.parseAiResp(barcode, respChatComp, &aibody, 1)
 }
 
@@ -274,6 +278,8 @@ func (ai *ChatGptAiCaller) callGpt(reqBodyJson []byte) (*ChatCompletion, error) 
 }
 
 func (ai *ChatGptAiCaller) webScrapeWithCtx(barcode int64, chatComp *ChatCompletion, aiReqBody *aiReqBody, callCount int) (*types.Product, error) {
+	allowedWebscrapeLimit := ai.callCountLimit - callCount
+
 	if chatComp == nil || aiReqBody == nil {
 		return nil, errors.New("chatComp and aiReqBody cannot be nil")
 	}
@@ -287,7 +293,7 @@ func (ai *ChatGptAiCaller) webScrapeWithCtx(barcode int64, chatComp *ChatComplet
 	aibody.Model = forceModel
 	aibody.Messages = append(aibody.Messages, chatComp.Choices[0].Message)
 
-	rawHtml, scrapeError := ScrapeDataOf(barcode, callCount)
+	rawHtml := ScrapeDataOf(barcode, callCount)
 
 	sysMsg := aiMessage{
 		Role:    "system",
@@ -299,23 +305,27 @@ func (ai *ChatGptAiCaller) webScrapeWithCtx(barcode int64, chatComp *ChatComplet
 		Name:       "request_more_info",
 		ToolCallId: chatComp.Choices[0].Message.ToolCalls[0].ID,
 	}
-	if scrapeError == nil {
-		scrapeMsg.Content = rawHtml
-		sysMsg.Content = "You got some additional scraped data from the function, try to logically fill out the final_response. Mock, empty, placeholder data is still not allowed. Try to figure out the fields logically. If you do believe the scraped data is not about a the food product, you can still use request_more_info, or if you think you still need more info. The request_more_info function can be used if you believe most of the data is still uncertain, otherwise use final_response."
-		aibody.Messages = append(aibody.Messages, scrapeMsg)
-	}
+
+	scrapeMsg.Content = rawHtml
+	sysMsg.Content = ("Remember you are filling out a product info of a food or drink product, ignore the text unrelated to any food or drink item. You got some scraped data, try to logically fill out the final_response. Mock, empty, placeholder data is still not allowed. Try to figure out the fields logically. If you do believe the scraped data is not about a the food product, you can still use request_more_info, or if you think you still need more info. If you can confidently answer it is prefered but you can still use the request_more_info function " + strconv.Itoa(allowedWebscrapeLimit) + " more times.")
+	aibody.Messages = append(aibody.Messages, scrapeMsg)
+
+	// Limit reached force model to finalize answer
 	if callCount == ai.callCountLimit {
-		sysMsg.Content = "You got some additional scraped data from the function, try to logically fill out the final_response. Mock, empty, placeholder data is still not allowed. Try to figure out the fields logically. Use final_response function to fill out the data, you can fill out the fields based on assumption, you are not allowed to fill the brand if you would just guess, write UNKNOWN to fields that would be just guesses without any bases."
+		sysMsg.Content = "You got some additional scraped data from the function, try to logically fill out the final_response. Mock, empty, placeholder data is still not allowed. Try to figure out the fields logically. Use final_response function to fill out the data, you can fill out the fields based on assumption, you are not allowed to fill the brand if you would just guess, write UNKNOWN to fields that would be just guesses without any bases. You are not allowed to use request_more_info anymore!"
 	}
 
 	aibody.Messages = append(aibody.Messages, sysMsg)
-
 	aiBodyJson, _ := json.MarshalIndent(aibody, "", "  ")
+
+	logger.Log().Debugf("Sent aibody json: %s", aiBodyJson)
 	respChatComp, err := ai.callGpt(aiBodyJson)
+	logger.Log().Debugf("Got response: %s", respChatComp)
+
 	if err != nil {
 		return nil, err
 	}
-	logger.Log().Debug(respChatComp)
+
 	return ai.parseAiResp(barcode, respChatComp, &aibody, callCount+1)
 }
 

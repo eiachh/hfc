@@ -107,9 +107,9 @@ func Init() {
 
 func makeDBlocal() *storage.MongoStorage {
 	username := "root"
-	password := os.Getenv("MONGODB_PWD")
+	password := "test1234"
 	host := "192.168.49.2"
-	port := "30020"
+	port := "30105"
 	authDB := "admin"
 	offDatabase := "off"
 	cacheDatabase := "loc-cache"

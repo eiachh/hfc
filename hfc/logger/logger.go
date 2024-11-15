@@ -15,7 +15,6 @@ var (
 
 type LogWriter struct{}
 
-// TODO add rolling file?
 func NewLogWriter() *LogWriter {
 	logFilePath = "/usr/hfc"
 	if _, err := os.Stat(logFilePath); os.IsNotExist(err) {

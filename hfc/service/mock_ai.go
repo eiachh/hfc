@@ -28,7 +28,7 @@ func (mockAi *MockAiCaller) ParseOff(trimmedOff []byte) (*types.Product, error) 
 
 func (ai *MockAiCaller) WebScrapeParse(barcode int64) (*types.Product, error) {
 	logger.Log().Warn("You used the mock ai FOREHEAD")
-	return nil, nil
+	return nil, errors.New("ou used the mock ai FOREHEAD")
 }
 
 func NewMockAiCaller() *MockAiCaller {

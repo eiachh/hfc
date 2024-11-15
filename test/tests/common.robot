@@ -10,6 +10,7 @@ ${ROOT_URL}    http://192.168.49.2:${HFC_PORT}
 ${HFC_PODNAME}    hfc
 
 ${TEST_NAMESPACE}    test
+${_mansetup}    false
 
 ${MONGO_PODNAME}    mongo
 ${MONGO_HOST}    mongo-mongodb.${TEST_NAMESPACE}.svc.cluster.local
@@ -137,3 +138,10 @@ TestPod Import Off Product
     ${command}=    Set Variable    minikube kubectl -- exec pod/${podname} -n ${namespace} -- mongoimport -u root -p ${MONGO_PWD} --authenticationDatabase admin --host ${MONGO_HOST} --port ${MONGO_PORT} --db off --collection products --file /etc/mongoimport.json
     Log To Console    Running cmd: ${command}
     ${result}=    Run Process    ${command}    shell=True
+
+*** Test Cases ***
+Actually Setup
+    [Documentation]     Using robot to set up env for manual purposes
+    IF    '${_mansetup} == true'
+            Setup Suite
+    END

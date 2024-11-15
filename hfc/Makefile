@@ -11,3 +11,6 @@ docker-build:
 		docker rmi $$(docker images --filter "dangling=true" -q --no-trunc); \
 	fi && \
 	docker images
+
+install-mongo:
+	robot -t "Actually Setup" -v TEST_NAMESPACE:"mantest" -v _mansetup:"true" test/tests/common.robot
