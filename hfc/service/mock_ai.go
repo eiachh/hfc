@@ -26,7 +26,7 @@ func (mockAi *MockAiCaller) ParseOff(trimmedOff []byte) (*types.Product, error) 
 	return nil, errors.New("did not contain yogobella barcode")
 }
 
-func (ai *MockAiCaller) WebScrapeParse(barcode int64) (*types.Product, error) {
+func (ai *MockAiCaller) WebScrapeParse(barcode int64, chatComp *types.ChatCompletion, aibody *types.AiReqBody, callCount int) (*types.Product, error) {
 	logger.Log().Warn("You used the mock ai FOREHEAD")
 	return nil, errors.New("ou used the mock ai FOREHEAD")
 }

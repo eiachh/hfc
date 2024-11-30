@@ -14,8 +14,8 @@ import (
 var scrapeLinkDict map[int64][]string
 
 func ScrapeDataOf(barcode int64, desiredLinkInd int) string {
-	errorNoDataTxt := "could not get any extra data"
-	barcodeStr := strconv.FormatInt(barcode, 10)
+	errorNoDataTxt := "Could not get any extra data, and won't be able to get more."
+	barcodeStr := strconv.FormatInt(barcode, 15)
 
 	if scrapeLinkDict == nil {
 		scrapeLinkDict = make(map[int64][]string)
@@ -57,7 +57,8 @@ func ScrapeDataOf(barcode int64, desiredLinkInd int) string {
 }
 
 func GetTextFomrWebsite(url string) (string, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	logger.Log().Debugf("Scraping website: %s", url)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	ctx, cancel = chromedp.NewExecAllocator(ctx,
 		append(chromedp.DefaultExecAllocatorOptions[:],
