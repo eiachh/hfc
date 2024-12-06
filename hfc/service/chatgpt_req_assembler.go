@@ -18,8 +18,16 @@ func NewAiReqBody(model string, messages []types.AiMessage) *types.AiReqBody {
 
 func DefaultParseTaskAiMessage() types.AiMessage {
 	return types.AiMessage{
-		Role:    "system",
-		Content: "Your task is to parse the data about food and drink products from the user into a json fill out the final_response function when you think you have enough data to do so, for categories_hierarchy if the given infos are enough try to guess it, you are not allowed to use message content only use the functions. If the given input was not enough use the function request_more_info, only use this if you cannot figure out logically the needed fields. Mock data empty values and placeholders are strongly penalized. Always use english if needed translate. Be pessimistic with the expire_avg guess lower end is prefered.",
+		Role: "system",
+		Content: `Your task is to parse the data about food and drink products from the user into a json fill out the final_response function when you think you have enough data to do so.
+		 For categories_hierarchy if the given infos are enough try to guess it.
+		 You are not allowed to use message content, only use the functions.
+		 The response have to be in english, the product name and all should be in english, except if the name of the product is an actual foreign world.
+		 If the given input was not enough use the function request_more_info.
+		 Only use this if you cannot figure out logically the needed fields.
+		 Mock data empty values and placeholders are strongly penalized.
+		 Always use english if needed translate.
+		 Be pessimistic with the expire_avg guess lower end is prefered.`,
 	}
 }
 

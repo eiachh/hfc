@@ -35,7 +35,7 @@ func (ai *AiParser) DoWebscrape(barcode int64) (*types.Product, error) {
 
 // Only leaves the "useful" data in the off input bytes
 func trimOff(input []byte) ([]byte, error) {
-	keysToKeep := []string{"code", "_keywords", "brands", "categories_hierarchy", "product_name"}
+	keysToKeep := []string{"code", "_keywords", "brands", "categories_hierarchy", "product_name", "product_quantity", "product_quantity_unit"}
 	var data map[string]interface{}
 
 	if err := json.Unmarshal(input, &data); err != nil {
